@@ -9,6 +9,9 @@
 import os
 import re
 from bs4 import BeautifulSoup
+import jieba
+# 引入词性标注接口
+import jieba.posseg as psg
 
 def get_valid_files_list(dir,fileNum):
     """　获取有效合格的测试数据文件
@@ -66,27 +69,38 @@ def get_QA_raw_info(file):
 
 
 
-def filter_tags():
+def filter_tags(List):
     """　过滤掉无意义的标签,如['帮助中心','FAQ']等
 
     Args:
+        List: 过滤前的标签集合
 
     Returns：
+        tagList: 过滤了无意义的taglist
     """
-    pass
+    useless_tags = ['帮助中心','FAQ']
+    tagList = []
+    for tag in List:
+        if tag not in useless_tags:
+            tagList.append(tag)
+
+    # for tag in tagList:
+    #     print(tag + ' ', end='')
+    # print()
+    return tagList
 
 
 
 def hand_row_QA(rowQ, rowA):
     """　对原始QA数据内容进行加工处理(这里的策略先暂定把answer的dom部分最终插入页面,不做其他多余的处理,重心放在问题的生成上)
 
-       Args:
-          rowQ: 粗问题标签(Q),待加工
-        　rowA: 粗问题答案(A),待加工
+    Args:
+       rowQ: 粗问题标签(Q),待加工
+     　rowA: 粗问题答案(A),待加工
 
-       Returns：
-        tagList: 问题标签(Q)
-        rowA: 问题答案(A)
+    Returns：
+     tagList: 问题标签(Q)
+     rowA: 问题答案(A)
     """
     tagList = []
     for tag in rowQ.stripped_strings:
@@ -96,11 +110,28 @@ def hand_row_QA(rowQ, rowA):
 
 
 
+def cut_words(tagList):
+    """　分词and词性标注　　
+
+    Args:
+        tagList: 问题标签(Q)集合
+    """
+
+    # 最后一个tag如果是英文,考虑不要分词　hold
+    for tag in tagList:
+        seg = psg.cut(tag)
+        for ele in seg:
+            print(ele)
+    print()
+
+
 def generate_Q(tagList):
     """　基于规则和NLP生成Question
 
+    Args:
+       tagList: 问题标签(Q)集合
     """
-    print(tagList)
+    cut_words(tagList)
 
 
 
@@ -116,6 +147,7 @@ def get_QA(dir):
     for i,file in enumerate(validFileSets):
         rowQ, rowA = get_QA_raw_info(file)
         tagList, answer = hand_row_QA(rowQ, rowA)
+        tagList = filter_tags(tagList)
         generate_Q(tagList)
 
 
