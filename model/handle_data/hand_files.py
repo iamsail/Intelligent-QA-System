@@ -14,11 +14,11 @@ def get_valid_files_list(dir,fileNum):
     """　获取有效合格的测试数据文件
 
     Args:
-        dir: {string} 测试文件所在的目录
-        fileNum: {int} 文件数量,开发阶段用于调控处理文件的数量
+        dir: 测试文件所在的目录
+        fileNum: 文件数量,开发阶段用于调控处理文件的数量
 
     Returns:
-        validFileSets: {List} 有效的文件集合
+        validFileSets: 有效的文件集合
     """
     fileSets = os.listdir(dir)
     fileSets.sort(key = str.lower)
@@ -38,10 +38,10 @@ def get_file_content(fileName):
     """　获取文件内容
 
     Args:
-        fileName: {string} 文件名
+        fileName: 文件名
 
     Returns:
-        fileContent: {string} 文件内容
+        fileContent: 文件内容
     """
     f = open('../../test-data/support.huaweicloud.com/%s'%(fileName), 'r')
     fileContent = f.read()
@@ -54,33 +54,53 @@ def get_QA_raw_info(file):
     """　从文件中获取未加工的QA对内容
 
     Args:
-       file: {string} 文件名
+       file:  文件名
 
     Returns:
-       rowQuestionTags: {string} 粗问题标签(Q),待加工
-       rowAnswers: {string} 粗问题答案(A),待加工
+       rowQ:  粗问题信息(Q),待加工
+       rowA:  粗问题答案信息(A),待加工
     """
-
-    QA = BeautifulSoup(get_file_content(file), 'html.parser').select('#content > .wrapper')[0]
-    rowQuestionTags = QA.select('.crumbs')
-    rowAnswers = []
-    for tag in QA.find_all("div", class_ ='content-block'):
-        rowAnswers.append(tag)
-    return rowQuestionTags, rowAnswers
+    rowQ = BeautifulSoup(get_file_content(file), 'html.parser').find_all("div", class_="crumbs", limit=1)[0]
+    rowA = rowQ.find_next_siblings()
+    return rowQ, rowA
 
 
 
-def hand_row_QA(rowQuestionTags, rowAnswers):
-    """　对原始QA数据内容进行加工处理
+def filter_tags():
+    """　过滤掉无意义的标签,如['帮助中心','FAQ']等
+
+    Args:
+
+    Returns：
+    """
+    pass
+
+
+
+def hand_row_QA(rowQ, rowA):
+    """　对原始QA数据内容进行加工处理(这里的策略先暂定把answer的dom部分最终插入页面,不做其他多余的处理,重心放在问题的生成上)
 
        Args:
-          rowQuestionTags: {string} 粗问题标签(Q),待加工
-        　rowAnswers: {string} 粗问题答案(A),待加工
+          rowQ: 粗问题标签(Q),待加工
+        　rowA: 粗问题答案(A),待加工
 
        Returns：
+        tagList: 问题标签(Q)
+        rowA: 问题答案(A)
     """
-    print(rowQuestionTags)
+    tagList = []
+    for tag in rowQ.stripped_strings:
+        tagList.append(tag)
+    tagList = " ".join(tagList).split(' > ')
+    return tagList, rowA
 
+
+
+def generate_Q(tagList):
+    """　基于规则和NLP生成Question
+
+    """
+    print(tagList)
 
 
 
@@ -92,11 +112,11 @@ def get_QA(dir):
 
     Returns：
     """
-    validFileSets = get_valid_files_list(dir, 4)
-    for file in validFileSets:
-        rowQuestionTags, rowAnswers = get_QA_raw_info(file)
-        hand_row_QA(rowQuestionTags, rowAnswers)
-
+    validFileSets = get_valid_files_list(dir, 20)
+    for i,file in enumerate(validFileSets):
+        rowQ, rowA = get_QA_raw_info(file)
+        tagList, answer = hand_row_QA(rowQ, rowA)
+        generate_Q(tagList)
 
 
 
