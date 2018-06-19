@@ -9,11 +9,15 @@
 import os
 import re
 from bs4 import BeautifulSoup
+from rule_generate_question import get_Q_by_rules
+
 import jieba
 # 引入词性标注接口
 import jieba.posseg as psg
 
-def get_valid_files_list(dir,fileNum):
+
+
+def get_valid_files_list(dir, startFileNum, endFileNum):
     """　获取有效合格的测试数据文件
 
     Args:
@@ -28,7 +32,7 @@ def get_valid_files_list(dir,fileNum):
     pattern = re.compile(r'<div class="crumbs">')
     validFileSets = []
     for i,fileName in enumerate(fileSets):
-        if i < fileNum:
+        if i >= startFileNum and i < endFileNum:
             fileContent = get_file_content(fileName)
             if len(pattern.findall(fileContent)) > 0:
                 validFileSets.append(fileName)
@@ -113,16 +117,34 @@ def hand_row_QA(rowQ, rowA):
 def cut_words(tagList):
     """　分词and词性标注　　
 
+    n   名词     取英语名词 noun的第1个字母。
+    x   非语素字  非语素字只是一个符号，字母 x通常用于代表未知数、符号。
+    nz  其他专名 “专”的声母的第 1个字母为z，名词代码n和z并在一起。
+    r   代词　　　哪些,有时,下载,为什么,什么,怎么
+    d   副词　　　不,
+    vn  名动词   (指具有名词功能的动词。动词和名词的代码并在一起。)  调用
+    l　　习用语　　(习用语尚未成为成语，有点“临时性”，取“临”的声母。) 常见问题,怎么办
+    a   形容词
+
+
     Args:
         tagList: 问题标签(Q)集合
+
+    Returns：
+        wordPairs: 分词后的单词与词性对
     """
+
+    wordPairs = []
 
     # 最后一个tag如果是英文,考虑不要分词　hold
     for tag in tagList:
         seg = psg.cut(tag)
         for ele in seg:
-            print(ele)
-    print()
+            wordPairs.append(ele)
+
+    return wordPairs
+    # get_Q_by_rules(wordPairs, tagList)
+    # print()
 
 
 def generate_Q(tagList):
@@ -131,7 +153,13 @@ def generate_Q(tagList):
     Args:
        tagList: 问题标签(Q)集合
     """
-    cut_words(tagList)
+    wordPairs = cut_words(tagList)
+    Q = get_Q_by_rules(wordPairs, tagList)
+    # if (Q):
+    #     print(Q)
+    # else:
+    #     print('未提取出问题')
+    return Q
 
 
 
@@ -143,12 +171,18 @@ def get_QA(dir):
 
     Returns：
     """
-    validFileSets = get_valid_files_list(dir, 20)
+    validFileSets = get_valid_files_list(dir, 1055, 1155)
     for i,file in enumerate(validFileSets):
         rowQ, rowA = get_QA_raw_info(file)
         tagList, answer = hand_row_QA(rowQ, rowA)
         tagList = filter_tags(tagList)
-        generate_Q(tagList)
+
+        # 载入自定义词典
+        jieba.load_userdict('./dict.txt')
+        question = generate_Q(tagList)
+        answer = rowA
+
+
 
 
 

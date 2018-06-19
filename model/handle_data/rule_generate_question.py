@@ -34,3 +34,43 @@
 # 二、有些标签以名词、形容词开头但是不能用“… …有哪些”来问。如“可视化”，“场景说明”。解决方法有待研究。
 #
 # 三、某些标签以其他词开头，如英文。解决方法有待研究。
+
+def rule1(wordPairs, tagList):
+    """　基于规则1生成问题
+
+    规则1: 假如只有一个有用标签或最后一个标签包含“简介”，则直接使用“什么是… …？”来生成问题。如：“帮助中心 > 机器学习服务”。
+
+    Args:
+       wordPairs: 分词后的单词与词性对
+       tagList: 问题标签(Q)集合
+
+    Returns:
+       question: 提取出的问题
+    """
+    question = ''
+    if len(wordPairs) == 1:
+        question = "什么是%s ?"%(str(wordPairs).split('/')[0])
+    elif '简介' in wordPairs[len(wordPairs) - 1]:
+        question = "什么是%s ?"%(tagList[len(tagList) - 1])
+
+    return question
+
+
+
+def get_Q_by_rules(wordPairs, tagList):
+    """　基于规则生成问题,遍历所有规则
+
+    Args:
+       wordPairs: 分词后的单词与词性对
+       tagList: 问题标签(Q)集合
+    Returns:
+       question: 提取出的问题
+    """
+
+    question = ''
+    if(rule1(wordPairs, tagList)):
+        question = rule1(wordPairs, tagList)
+
+    return question
+
+
