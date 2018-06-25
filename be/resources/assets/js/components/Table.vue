@@ -44,13 +44,15 @@
     export default {
         name: "Table",
         methods: {
+          /**
+           * 获取QA对
+           */
           getQA() {
               axios.get('/QA')
                   .then( (response)  =>{
                       let QA = response.data.QA;
                       QA.forEach((val) => {
                         this.tableData.push(val);
-                        console.log(val)
                       })
                   })
                   .catch( (error) => {

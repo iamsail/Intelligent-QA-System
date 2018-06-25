@@ -7,6 +7,7 @@
              <meta name="csrf-token" content="{{ csrf_token() }}">
 
              <title>智能对话系统</title>
+             <link href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" rel="stylesheet">
 
              <!-- Fonts -->
              <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">

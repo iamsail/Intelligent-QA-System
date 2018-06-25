@@ -71,8 +71,10 @@
                                 parameter = ['用户名不存在', 'error'];
                             } else if (response.data === 2) {
                                 parameter = ['密码错误', 'error'];
-                            } else {
+                            } else if (response.data === 1) {
                                 parameter = ['登录成功', 'success'];
+                            } else if (response.data === 3) {
+                                parameter = ['该用户已经登录', 'error'];
                             }
                             this.showLoginStatus(parameter);
                             if (response.data === 1) {

@@ -1,10 +1,12 @@
 <template>
     <div>
+        <Header v-bind:showLogout="true"></Header>
         <Table></Table>
     </div>
 </template>
 
 <script>
+    import Header from './common/Header'
     import Table from './Table'
     export default {
         name: "App",
@@ -13,7 +15,8 @@
             }
         },
         components: {
-            Table
+            Table,
+            Header
         },
         methods: {
 
