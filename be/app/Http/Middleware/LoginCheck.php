@@ -10,6 +10,7 @@ class LoginCheck
 {
     /**
      * Handle an incoming request.
+     * 如果用户尚未登录则跳转到登录界面
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

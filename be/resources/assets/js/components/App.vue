@@ -6,7 +6,6 @@
 
 <script>
     import Table from './Table'
-
     export default {
         name: "App",
         data() {

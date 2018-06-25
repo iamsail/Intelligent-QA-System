@@ -15,6 +15,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::post('/login/verify/', 'AppController@login');
 
 Route::group(['middleware' => ['login']], function () {
     Route::get('/', function () {
@@ -25,12 +26,3 @@ Route::group(['middleware' => ['login']], function () {
 });
 
 
-
-
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//
-//
-//Route::get('/QA', 'AppController@getQA');
