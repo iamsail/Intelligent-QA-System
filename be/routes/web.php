@@ -35,3 +35,6 @@ Route::post('/login/verify/', 'AppController@login');
 
 //　用户登出
 Route::get('/logout', 'AppController@logout');
+
+//　用户登出
+Route::delete('/QA/all/', 'AppController@clearAllQA');

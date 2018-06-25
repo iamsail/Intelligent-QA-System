@@ -85,4 +85,10 @@ class AppController
         $request->session()->flush();
         return $this->getUsername();
     }
+
+
+    public function clearAllQA() {
+        $deleted = DB::delete('delete from all_QA');
+        return $deleted;
+    }
 }

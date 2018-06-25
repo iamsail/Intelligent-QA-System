@@ -3,7 +3,7 @@
         <el-table
                 :data="tableData"
                 stripe
-                style="width: 80%">
+                style="width: 100%">
             <el-table-column
                     prop="id"
                     align="center"
@@ -43,6 +43,7 @@
 <script>
     export default {
         name: "Table",
+        props:["arrQA"],
         methods: {
           /**
            * 获取QA对
@@ -73,6 +74,6 @@
 
 <style>
     .QA-table .el-table {
-        margin: 0 auto;
+        /*margin: 0 auto;*/
     }
 </style>

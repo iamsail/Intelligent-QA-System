@@ -91392,7 +91392,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.hello[data-v-8142f38c] {\n    font-size: 2em;\n    color: green;\n}\n", ""]);
+exports.push([module.i, "\n.app[data-v-8142f38c] {\n}\n.app .left[data-v-8142f38c]{\n    display: inline-block;\n    width: 80%;\n}\n.app .right[data-v-8142f38c]{\n    width: 20%;\n    min-height: 900px;\n    height: 100%;\n    float: right;\n    border: 2px solid red;\n}\n", ""]);
 
 // exports
 
@@ -91407,6 +91407,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_Header___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__common_Header__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AdminCenter__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AdminCenter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__AdminCenter__);
 //
 //
 //
@@ -91414,6 +91416,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -91425,7 +91435,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {
         Table: __WEBPACK_IMPORTED_MODULE_1__Table___default.a,
-        Header: __WEBPACK_IMPORTED_MODULE_0__common_Header___default.a
+        Header: __WEBPACK_IMPORTED_MODULE_0__common_Header___default.a,
+        AdminCenter: __WEBPACK_IMPORTED_MODULE_2__AdminCenter___default.a
     },
     methods: {},
     mounted: function mounted() {}
@@ -91517,7 +91528,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.QA-table .el-table {\n    margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n", ""]);
 
 // exports
 
@@ -91573,6 +91584,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Table",
+    props: ["arrQA"],
     methods: {
         /**
          * 获取QA对
@@ -91613,7 +91625,7 @@ var render = function() {
       _c(
         "el-table",
         {
-          staticStyle: { width: "80%" },
+          staticStyle: { width: "100%" },
           attrs: { data: _vm.tableData, stripe: "" }
         },
         [
@@ -91681,7 +91693,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("Header", { attrs: { showLogout: true } }), _vm._v(" "), _c("Table")],
+    { staticClass: "app" },
+    [
+      _c("Header", { attrs: { showLogout: true } }),
+      _vm._v(" "),
+      _c("main", [
+        _c("section", { staticClass: "left" }, [_c("Table")], 1),
+        _vm._v(" "),
+        _c("section", { staticClass: "right" }, [_c("AdminCenter")], 1)
+      ])
+    ],
     1
   )
 }
@@ -91700,6 +91721,421 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(224)
+}
+var normalizeComponent = __webpack_require__(49)
+/* script */
+var __vue_script__ = __webpack_require__(226)
+/* template */
+var __vue_template__ = __webpack_require__(227)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3f49561d"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/AdminCenter.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3f49561d", Component.options)
+  } else {
+    hotAPI.reload("data-v-3f49561d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(225);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(48)("0070c1ec", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f49561d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminCenter.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f49561d\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AdminCenter.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(25)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.admin-center[data-v-3f49561d] {\n}\n.admin-center h1[data-v-3f49561d]{\n    background: skyblue;\n    text-align: center;\n    margin: 0 auto;\n    height: 36px;\n    line-height: 36px;\n    color: white;\n    font-weight: 600;\n}\n.admin-center .controller[data-v-3f49561d] {\n    margin-top: 5px;\n}\n.admin-center .controller div[data-v-3f49561d] {\n    display: inline-block;\n    margin-left: 3px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 226 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "AdminCenter",
+    data: function data() {
+        return {
+            visible: false,
+
+            dialogFormVisible: false,
+            form: {
+                name: '',
+                region: '',
+                date1: '',
+                date2: '',
+                delivery: false,
+                type: [],
+                resource: '',
+                desc: ''
+            },
+            formLabelWidth: '120px'
+        };
+    },
+
+    methods: {
+        refresh: function refresh() {
+            window.location.href = '/';
+        },
+        clearQA: function clearQA() {
+            var _this = this;
+
+            this.visible = false;
+            axios.delete('/QA/all/').then(function (response) {
+                _this.refresh();
+            }).catch(function (error) {});
+        }
+    }
+
+});
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "admin-center" }, [
+    _c("h1", [_vm._v("控制中心")]),
+    _vm._v(" "),
+    _c("section", { staticClass: "controller" }, [
+      _c(
+        "div",
+        [
+          _c(
+            "el-popover",
+            {
+              attrs: { placement: "top", width: "160" },
+              model: {
+                value: _vm.visible,
+                callback: function($$v) {
+                  _vm.visible = $$v
+                },
+                expression: "visible"
+              }
+            },
+            [
+              _c("p", [_vm._v("确定清空所有QA对吗?")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticStyle: { "text-align": "right", margin: "0" } },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { size: "mini", type: "text" },
+                      on: {
+                        click: function($event) {
+                          _vm.visible = false
+                        }
+                      }
+                    },
+                    [_vm._v("取消")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", size: "mini" },
+                      on: {
+                        click: function($event) {
+                          _vm.clearQA()
+                        }
+                      }
+                    },
+                    [_vm._v("确定")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { slot: "reference", type: "danger" },
+                  slot: "reference"
+                },
+                [_vm._v("清空QA对")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "el-button",
+            {
+              attrs: { type: "success" },
+              on: {
+                click: function($event) {
+                  _vm.dialogFormVisible = true
+                }
+              }
+            },
+            [_vm._v("新增QA对")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-dialog",
+            {
+              attrs: { title: "收货地址", visible: _vm.dialogFormVisible },
+              on: {
+                "update:visible": function($event) {
+                  _vm.dialogFormVisible = $event
+                }
+              }
+            },
+            [
+              _c(
+                "el-form",
+                { attrs: { model: _vm.form } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "活动名称",
+                        "label-width": _vm.formLabelWidth
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { "auto-complete": "off" },
+                        model: {
+                          value: _vm.form.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "name", $$v)
+                          },
+                          expression: "form.name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "活动区域",
+                        "label-width": _vm.formLabelWidth
+                      }
+                    },
+                    [
+                      _c(
+                        "el-select",
+                        {
+                          attrs: { placeholder: "请选择活动区域" },
+                          model: {
+                            value: _vm.form.region,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "region", $$v)
+                            },
+                            expression: "form.region"
+                          }
+                        },
+                        [
+                          _c("el-option", {
+                            attrs: { label: "区域一", value: "shanghai" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-option", {
+                            attrs: { label: "区域二", value: "beijing" }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dialog-footer",
+                  attrs: { slot: "footer" },
+                  slot: "footer"
+                },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.dialogFormVisible = false
+                        }
+                      }
+                    },
+                    [_vm._v("取 消")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialogFormVisible = false
+                        }
+                      }
+                    },
+                    [_vm._v("确 定")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3f49561d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
