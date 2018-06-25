@@ -14,8 +14,13 @@ class AppController
     public function test () {
         $arr = array();
         $arr['key'] = 'sail';
-        $arr['db'] = DB::select('select * from all_QA where id = ?', [1]);;
+        return $arr;
+    }
 
+
+    public function getQA() {
+        $arr = array();
+        $arr['QA'] = DB::select('select * from all_QA');
         return $arr;
     }
 }

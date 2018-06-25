@@ -18,12 +18,12 @@ window.Vue = require('vue');
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import App from './components/App.vue'; // 引入Hello 组件
+import Login from './components/Login.vue'; // 引入Hello 组件
 import axios from 'axios'
 
 Vue.use(ElementUI);
 
 const app = new Vue({
     el: '#app',
-    render: h => h(App)
+    render: h => h(Login)
 });

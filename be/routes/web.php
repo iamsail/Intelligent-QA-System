@@ -11,10 +11,26 @@
 |
 */
 
-Route::get('/test', 'AppController@test');
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', function () {
+    return view('login');
 });
 
 
+Route::group(['middleware' => ['login']], function () {
+    Route::get('/', function () {
+        return view('app');
+    });
+
+    Route::get('/QA', 'AppController@getQA');
+});
+
+
+
+
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+//
+//
+//Route::get('/QA', 'AppController@getQA');
