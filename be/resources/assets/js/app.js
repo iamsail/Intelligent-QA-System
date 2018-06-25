@@ -17,7 +17,6 @@ window.Vue = require('vue');
 
 import App from './components/App.vue'; // 引入Hello 组件
 
-
 const app = new Vue({
     el: '#app',
     render: h => h(App)

@@ -1102,7 +1102,6 @@ window.Vue = __webpack_require__(36);
 
  // 引入Hello 组件
 
-
 var app = new Vue({
   el: '#app',
   render: function render(h) {
@@ -43626,6 +43625,8 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExampleComponent__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ExampleComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ExampleComponent__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 //
 //
 //
@@ -43633,18 +43634,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "App",
     data: function data() {
         return {
-            msg: 'software-cup.'
+            msg: 'software-cup.',
+            test: '666',
+            test1: ''
         };
     },
 
     components: {
         example: __WEBPACK_IMPORTED_MODULE_0__ExampleComponent___default.a
+    },
+    methods: {
+        orz: function orz() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/test').then(function (response) {
+                console.log(response);
+                _this.test = response.data.key;
+                _this.test1 = response.data.db[0].answer;
+            }).catch(function (error) {});
+        }
+    },
+    mounted: function mounted() {
+        this.orz();
     }
 });
 
@@ -43778,7 +43798,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("h1", [_vm._v("come on")]), _vm._v(" "), _c("example")],
+    [
+      _c("h1", [_vm._v("come on")]),
+      _vm._v(" "),
+      _c("example"),
+      _vm._v(" "),
+      _c("h2", [_vm._v(_vm._s(_vm.test))]),
+      _vm._v(" "),
+      _c("h2", [_vm._v(_vm._s(_vm.test1))])
+    ],
     1
   )
 }

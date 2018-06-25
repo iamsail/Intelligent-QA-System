@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/test', 'AppController@test');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+
