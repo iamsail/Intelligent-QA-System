@@ -91258,7 +91258,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(198);
-module.exports = __webpack_require__(209);
+module.exports = __webpack_require__(214);
 
 
 /***/ }),
@@ -91319,7 +91319,7 @@ var normalizeComponent = __webpack_require__(49)
 /* script */
 var __vue_script__ = __webpack_require__(202)
 /* template */
-var __vue_template__ = __webpack_require__(208)
+var __vue_template__ = __webpack_require__(213)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -91407,7 +91407,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common_Header___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__common_Header__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AdminCenter__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AdminCenter__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__AdminCenter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__AdminCenter__);
 //
 //
@@ -91687,68 +91687,16 @@ if (false) {
 /* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "app" },
-    [
-      _c("Header", { attrs: { showLogout: true } }),
-      _vm._v(" "),
-      _c("main", [
-        _c("section", { staticClass: "left" }, [_c("Table")], 1),
-        _vm._v(" "),
-        _c("section", { staticClass: "right" }, [_c("AdminCenter")], 1)
-      ])
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8142f38c", module.exports)
-  }
-}
-
-/***/ }),
-/* 209 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(224)
+  __webpack_require__(209)
 }
 var normalizeComponent = __webpack_require__(49)
 /* script */
-var __vue_script__ = __webpack_require__(226)
+var __vue_script__ = __webpack_require__(211)
 /* template */
-var __vue_template__ = __webpack_require__(227)
+var __vue_template__ = __webpack_require__(212)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -91787,13 +91735,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 224 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(225);
+var content = __webpack_require__(210);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -91813,7 +91761,7 @@ if(false) {
 }
 
 /***/ }),
-/* 225 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(25)(false);
@@ -91827,11 +91775,18 @@ exports.push([module.i, "\n.admin-center[data-v-3f49561d] {\n}\n.admin-center h1
 
 
 /***/ }),
-/* 226 */
+/* 211 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -91883,23 +91838,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             dialogFormVisible: false,
             form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
+                question: '',
+                theme: '',
+                answer: '',
+                answer_link: '',
+                extend_question: ''
             },
             formLabelWidth: '120px'
         };
     },
 
     methods: {
+        /**
+         * 刷新页面
+         */
         refresh: function refresh() {
             window.location.href = '/';
         },
+
+
+        /**
+         * 清空删除所有QA对
+         */
         clearQA: function clearQA() {
             var _this = this;
 
@@ -91907,13 +91867,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.delete('/QA/all/').then(function (response) {
                 _this.refresh();
             }).catch(function (error) {});
+        },
+
+
+        /**
+         * 新增QA对
+         */
+        addQA: function addQA() {
+            this.dialogFormVisible = false;
+            axios.post('/QA/', this.form).then(function (response) {
+                console.log(response);
+                console.log(response.data);
+            }).catch(function (error) {});
         }
     }
 
 });
 
 /***/ }),
-/* 227 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -92009,7 +91981,7 @@ var render = function() {
           _c(
             "el-dialog",
             {
-              attrs: { title: "收货地址", visible: _vm.dialogFormVisible },
+              attrs: { title: "添加QA对", visible: _vm.dialogFormVisible },
               on: {
                 "update:visible": function($event) {
                   _vm.dialogFormVisible = $event
@@ -92025,19 +91997,23 @@ var render = function() {
                     "el-form-item",
                     {
                       attrs: {
-                        label: "活动名称",
+                        label: "问题",
                         "label-width": _vm.formLabelWidth
                       }
                     },
                     [
                       _c("el-input", {
-                        attrs: { "auto-complete": "off" },
+                        attrs: {
+                          "auto-complete": "off",
+                          type: "textarea",
+                          rows: 4
+                        },
                         model: {
-                          value: _vm.form.name,
+                          value: _vm.form.question,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "name", $$v)
+                            _vm.$set(_vm.form, "question", $$v)
                           },
-                          expression: "form.name"
+                          expression: "form.question"
                         }
                       })
                     ],
@@ -92048,34 +92024,106 @@ var render = function() {
                     "el-form-item",
                     {
                       attrs: {
-                        label: "活动区域",
+                        label: "主题",
                         "label-width": _vm.formLabelWidth
                       }
                     },
                     [
-                      _c(
-                        "el-select",
-                        {
-                          attrs: { placeholder: "请选择活动区域" },
-                          model: {
-                            value: _vm.form.region,
-                            callback: function($$v) {
-                              _vm.$set(_vm.form, "region", $$v)
-                            },
-                            expression: "form.region"
-                          }
+                      _c("el-input", {
+                        attrs: {
+                          "auto-complete": "off",
+                          type: "textarea",
+                          rows: 4
                         },
-                        [
-                          _c("el-option", {
-                            attrs: { label: "区域一", value: "shanghai" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-option", {
-                            attrs: { label: "区域二", value: "beijing" }
-                          })
-                        ],
-                        1
-                      )
+                        model: {
+                          value: _vm.form.theme,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "theme", $$v)
+                          },
+                          expression: "form.theme"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "答案",
+                        "label-width": _vm.formLabelWidth
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          "auto-complete": "off",
+                          type: "textarea",
+                          rows: 4
+                        },
+                        model: {
+                          value: _vm.form.answer,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "answer", $$v)
+                          },
+                          expression: "form.answer"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "答案链接",
+                        "label-width": _vm.formLabelWidth
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          "auto-complete": "off",
+                          type: "textarea",
+                          rows: 4
+                        },
+                        model: {
+                          value: _vm.form.answer_link,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "answer_link", $$v)
+                          },
+                          expression: "form.answer_link"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "扩展问题",
+                        "label-width": _vm.formLabelWidth
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: {
+                          "auto-complete": "off",
+                          type: "textarea",
+                          rows: 4
+                        },
+                        model: {
+                          value: _vm.form.extend_question,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "extend_question", $$v)
+                          },
+                          expression: "form.extend_question"
+                        }
+                      })
                     ],
                     1
                   )
@@ -92109,7 +92157,7 @@ var render = function() {
                       attrs: { type: "primary" },
                       on: {
                         click: function($event) {
-                          _vm.dialogFormVisible = false
+                          _vm.addQA()
                         }
                       }
                     },
@@ -92136,6 +92184,45 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-3f49561d", module.exports)
   }
 }
+
+/***/ }),
+/* 213 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "app" },
+    [
+      _c("Header", { attrs: { showLogout: true } }),
+      _vm._v(" "),
+      _c("main", [
+        _c("section", { staticClass: "left" }, [_c("Table")], 1),
+        _vm._v(" "),
+        _c("section", { staticClass: "right" }, [_c("AdminCenter")], 1)
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8142f38c", module.exports)
+  }
+}
+
+/***/ }),
+/* 214 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -86,9 +86,23 @@ class AppController
         return $this->getUsername();
     }
 
-
+    /**
+     * 清空所有QA对
+     *
+     * @return $deleted 删除的数量
+     */
     public function clearAllQA() {
         $deleted = DB::delete('delete from all_QA');
         return $deleted;
+    }
+
+    /**
+     * 添加QA对
+     *
+     * @param  {Request} $request 用户请求
+     */
+    public function addQA(Request $request) {
+        $QA = $request->all();
+        DB::insert('insert into all_QA(question, theme, answer, answer_link, extend_question) values(?, ?, ?, ?, ?)', [$QA['question'], $QA['theme'], $QA['answer'], $QA['answer_link'], $QA['extend_question']]);
     }
 }

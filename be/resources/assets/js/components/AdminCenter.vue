@@ -18,21 +18,28 @@
 
             <div>
                 <el-button type="success" @click="dialogFormVisible = true">新增QA对</el-button>
-                <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+                <el-dialog title="添加QA对" :visible.sync="dialogFormVisible">
                     <el-form :model="form">
-                        <el-form-item label="活动名称" :label-width="formLabelWidth">
-                            <el-input v-model="form.name" auto-complete="off"></el-input>
+                        <el-form-item label="问题" :label-width="formLabelWidth">
+                            <el-input v-model="form.question" auto-complete="off" type="textarea" :rows="4"></el-input>
                         </el-form-item>
-                        <el-form-item label="活动区域" :label-width="formLabelWidth">
-                            <el-select v-model="form.region" placeholder="请选择活动区域">
-                                <el-option label="区域一" value="shanghai"></el-option>
-                                <el-option label="区域二" value="beijing"></el-option>
-                            </el-select>
+                        <el-form-item label="主题" :label-width="formLabelWidth">
+                            <el-input v-model="form.theme" auto-complete="off" type="textarea" :rows="4"></el-input>
+                        </el-form-item>
+                        <el-form-item label="答案" :label-width="formLabelWidth">
+                            <el-input v-model="form.answer" auto-complete="off" type="textarea" :rows="4"></el-input>
+                        </el-form-item>
+                        <el-form-item label="答案链接" :label-width="formLabelWidth">
+                            <el-input v-model="form.answer_link" auto-complete="off" type="textarea" :rows="4"></el-input>
+                        </el-form-item>
+                        <el-form-item label="扩展问题" :label-width="formLabelWidth">
+                            <el-input v-model="form.extend_question" auto-complete="off" type="textarea" :rows="4"></el-input>
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
                         <el-button @click="dialogFormVisible = false">取 消</el-button>
-                        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+                        <el-button type="primary" @click="addQA()">确 定</el-button>
+                        <!--<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
                     </div>
                 </el-dialog>
             </div>
@@ -49,27 +56,46 @@
 
                 dialogFormVisible: false,
                 form: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
+                    question: '',
+                    theme: '',
+                    answer: '',
+                    answer_link: '',
+                    extend_question: ''
                 },
                 formLabelWidth: '120px'
             };
         },
         methods: {
+            /**
+             * 刷新页面
+             */
             refresh() {
                 window.location.href = '/';
             },
+
+            /**
+             * 清空删除所有QA对
+             */
             clearQA() {
                 this.visible = false;
                 axios.delete('/QA/all/')
                     .then((response)  =>{
                         this.refresh();
+                    })
+                    .catch((error) => {
+
+                    });
+            },
+
+            /**
+             * 新增QA对
+             */
+            addQA() {
+                this.dialogFormVisible = false;
+                axios.post('/QA/', this.form)
+                    .then((response) => {
+                        console.log(response);
+                        console.log(response.data);
                     })
                     .catch((error) => {
 
