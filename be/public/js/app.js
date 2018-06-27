@@ -91874,10 +91874,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * 新增QA对
          */
         addQA: function addQA() {
+            var _this2 = this;
+
             this.dialogFormVisible = false;
             axios.post('/QA/', this.form).then(function (response) {
-                console.log(response);
-                console.log(response.data);
+                if (response.data) {
+                    _this2.refresh();
+                } else {
+                    _this2.$message({
+                        message: 'QA对增加失败',
+                        type: 'error'
+                    });
+                }
             }).catch(function (error) {});
         }
     }

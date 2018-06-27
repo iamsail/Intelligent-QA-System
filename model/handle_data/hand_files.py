@@ -10,6 +10,8 @@ import os
 import re
 from bs4 import BeautifulSoup
 from rule_generate_question import get_Q_by_rules
+import pymysql.cursors
+import pymysql
 
 import jieba
 # 引入词性标注接口
@@ -95,12 +97,13 @@ def filter_tags(List):
 
 
 
+
 def hand_row_QA(rowQ, rowA):
     """　对原始QA数据内容进行加工处理(这里的策略先暂定把answer的dom部分最终插入页面,不做其他多余的处理,重心放在问题的生成上)
 
     Args:
        rowQ: 粗问题标签(Q),待加工
-     　rowA: 粗问题答案(A),待加工
+     　rowA: 粗问题答案(A),待加工https://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=7291877755043908648&skey=%40crypt_fb34f6fe_e4f6973153362fb53368d3810c1ee2da
 
     Returns：
      tagList: 问题标签(Q)
@@ -110,7 +113,19 @@ def hand_row_QA(rowQ, rowA):
     for tag in rowQ.stripped_strings:
         tagList.append(tag)
     tagList = " ".join(tagList).split(' > ')
-    return tagList, rowA
+
+
+    COMMENT = r'<!--|//'
+    Answer = ''
+    for val in rowA[0].stripped_strings:
+        val = "".join(val.split())
+        if(not re.match(COMMENT, val)):
+            Answer = '%s %s' % (Answer, val)
+
+    return tagList, Answer
+
+
+
 
 
 
@@ -162,6 +177,27 @@ def generate_Q(tagList):
     return Q
 
 
+def save_QA(question, answer, QALink):
+    # Connect to the database
+    connection = pymysql.connect(host='127.0.0.1',
+                                 user='root',
+                                 password='sail',
+                                 db='cup',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+
+    try:
+        with connection.cursor() as cursor:
+            # Create a new record
+            sql = "INSERT INTO `all_QA` (`question`, `answer`, `answer_link`) VALUES (%s, %s, %s)"
+            cursor.execute(sql, (question, answer, QALink))
+
+        # connection is not autocommit by default. So you must commit to save
+        # your changes.
+        connection.commit()
+    finally:
+        connection.close()
+
 
 def get_QA(dir):
     """　获取QA对
@@ -171,7 +207,8 @@ def get_QA(dir):
 
     Returns：
     """
-    validFileSets = get_valid_files_list(dir, 1055, 1155)
+    # validFileSets = get_valid_files_list(dir, 1055, 1155)
+    validFileSets = get_valid_files_list(dir, 1059, 1060)
     for i,file in enumerate(validFileSets):
         rowQ, rowA = get_QA_raw_info(file)
         tagList, answer = hand_row_QA(rowQ, rowA)
@@ -180,7 +217,11 @@ def get_QA(dir):
         # 载入自定义词典
         jieba.load_userdict('./dict.txt')
         question = generate_Q(tagList)
-        answer = rowA
+        # print(rowA)
+        # answer = str(rowA[0])
+        if question:
+            QALink = 'https://%s' % (file)
+            save_QA(question, answer, QALink)
 
 
 

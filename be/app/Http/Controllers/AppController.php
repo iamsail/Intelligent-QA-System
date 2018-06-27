@@ -103,6 +103,7 @@ class AppController
      */
     public function addQA(Request $request) {
         $QA = $request->all();
-        DB::insert('insert into all_QA(question, theme, answer, answer_link, extend_question) values(?, ?, ?, ?, ?)', [$QA['question'], $QA['theme'], $QA['answer'], $QA['answer_link'], $QA['extend_question']]);
+        $add = DB::insert('insert into all_QA(question, theme, answer, answer_link, extend_question) values(?, ?, ?, ?, ?)', [$QA['question'], $QA['theme'], $QA['answer'], $QA['answer_link'], $QA['extend_question']]);
+        return ($add)?(1):(0);
     }
 }

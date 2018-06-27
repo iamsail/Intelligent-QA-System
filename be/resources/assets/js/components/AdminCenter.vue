@@ -94,8 +94,14 @@
                 this.dialogFormVisible = false;
                 axios.post('/QA/', this.form)
                     .then((response) => {
-                        console.log(response);
-                        console.log(response.data);
+                        if (response.data) {
+                            this.refresh();
+                        } else {
+                            this.$message({
+                                message: 'QA对增加失败',
+                                type: 'error'
+                            });
+                        }
                     })
                     .catch((error) => {
 
