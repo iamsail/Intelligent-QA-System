@@ -99,7 +99,7 @@ def filter_tags(List):
 
 
 def hand_row_QA(rowQ, rowA):
-    """　对原始QA数据内容进行加工处理(这里的策略先暂定把answer的dom部分最终插入页面,不做其他多余的处理,重心放在问题的生成上)
+    """　对原始QA数据内容进行加工处理,获取了answer　
 
     Args:
        rowQ: 粗问题标签(Q),待加工
@@ -217,8 +217,7 @@ def get_QA(dir):
         # 载入自定义词典
         jieba.load_userdict('./dict.txt')
         question = generate_Q(tagList)
-        # print(rowA)
-        # answer = str(rowA[0])
+
         if question:
             QALink = 'https://%s' % (file)
             save_QA(question, answer, QALink)

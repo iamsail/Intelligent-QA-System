@@ -70,7 +70,7 @@
              * 刷新页面
              */
             refresh() {
-                window.location.href = '/';
+                window.location.href = '/admin';
             },
 
             /**
@@ -132,5 +132,6 @@
     .admin-center .controller div {
         display: inline-block;
         margin-left: 3px;
+
     }
 </style>

@@ -15,7 +15,7 @@
 
 Route::group(['middleware' => ['login']], function () {
     //　首页视图
-    Route::get('/', function () {
+    Route::get('/admin', function () {
         return view('app');
     });
 
@@ -25,6 +25,11 @@ Route::group(['middleware' => ['login']], function () {
 //　登录界面视图
 Route::get('/login', function () {
     return view('login');
+});
+
+//　登录界面视图
+Route::get('/', function () {
+    return view('qa');
 });
 
 //　获取用户名

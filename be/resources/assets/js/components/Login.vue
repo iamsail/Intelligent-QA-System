@@ -78,7 +78,7 @@
                             }
                             this.showLoginStatus(parameter);
                             if (response.data === 1) {
-                                window.location.href = '/';
+                                window.location.href = '/admin';
                             }
                         }).catch(function (error) {
                             console.log(error);

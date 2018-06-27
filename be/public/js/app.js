@@ -91528,7 +91528,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n", ""]);
+exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n@-webkit-keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n@keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n.QA-table .el-table tbody .cell {\n    white-space:nowrap;\n    text-overflow:ellipsis;\n    min-height: 30px;\n}\n.QA-table .el-table tbody .cell:hover {\n    -webkit-animation: typing .1s 1s ease-out both;\n            animation: typing .1s 1s ease-out both;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n", ""]);
 
 // exports
 
@@ -91539,6 +91539,10 @@ exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n",
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -91626,16 +91630,11 @@ var render = function() {
         "el-table",
         {
           staticStyle: { width: "100%" },
-          attrs: { data: _vm.tableData, stripe: "" }
+          attrs: { data: _vm.tableData, stripe: "", border: "" }
         },
         [
           _c("el-table-column", {
-            attrs: {
-              prop: "id",
-              align: "center",
-              label: "问题id",
-              width: "180"
-            }
+            attrs: { prop: "id", align: "center", label: "问题id", width: "80" }
           }),
           _vm._v(" "),
           _c("el-table-column", {
@@ -91643,20 +91642,35 @@ var render = function() {
               prop: "question",
               align: "center",
               label: "问题",
-              width: "180"
+              width: "240"
             }
           }),
           _vm._v(" "),
           _c("el-table-column", {
-            attrs: { prop: "theme", align: "center", label: "主题" }
+            attrs: {
+              prop: "theme",
+              align: "center",
+              width: "200",
+              label: "主题"
+            }
           }),
           _vm._v(" "),
           _c("el-table-column", {
-            attrs: { prop: "answer", align: "center", label: "答案" }
+            attrs: {
+              prop: "answer",
+              align: "center",
+              width: "350",
+              label: "答案"
+            }
           }),
           _vm._v(" "),
           _c("el-table-column", {
-            attrs: { prop: "answer_link", align: "center", label: "答案链接" }
+            attrs: {
+              prop: "answer_link",
+              width: "350",
+              align: "center",
+              label: "答案链接"
+            }
           }),
           _vm._v(" "),
           _c("el-table-column", {
@@ -91853,7 +91867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * 刷新页面
          */
         refresh: function refresh() {
-            window.location.href = '/';
+            window.location.href = '/admin';
         },
 
 
