@@ -91193,13 +91193,263 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.qa[data-v-69193267] {\n    -webkit-box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n            box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n    position: relative;\n    left: 50%;\n    width: 370px;\n    height: 90vh;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    margin-top: 5vh;\n    border-radius: 20px;\n    background: skyblue;\n}\n.qa main header[data-v-69193267] {\n    width: 100%;\n    background: white;\n    border-radius: 20px 20px 0px 0px;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #CCCCCC;\n}\n.qa main footer[data-v-69193267] {\n    width: 100%;\n    position: absolute;\n    border-radius: 0px 0px 20px 20px;\n    height: 60px;\n    line-height: 60px;\n    bottom: 0;\n    background: white;\n}\n.qa section[data-v-69193267] {\n    margin-top: 12px;\n    margin-left: 8px;\n    margin-right: 8px;\n}\n.qa section .line[data-v-69193267] {\n    margin-top: 14px;\n}\n.qa section .common[data-v-69193267] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n}\n.qa section .question[data-v-69193267] {\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    border-radius: 60px/20px 40px 70px 100px;\n}\n.qa section .answer[data-v-69193267] {\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    float: right;\n    border-radius: 10px 30px 70px;\n}\n.qa footer[data-v-69193267] {\n}\n.qa footer input[data-v-69193267] {\n    border: none;\n    height: 30px;\n    margin-right: 12px;\n    margin-left: 12px;\n    width: 90%;\n    color: #383434;\n}\n.qa footer input[data-v-69193267]:focus {\n    outline: -webkit-focus-ring-color auto 5px;\n    outline-color: white;\n    outline-style: auto;\n    outline-width: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.qa[data-v-69193267] {\n    -webkit-box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n            box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n    position: relative;\n    left: 50%;\n    width: 370px;\n    height: 90vh;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    margin-top: 5vh;\n    border-radius: 20px;\n    background: skyblue;\n}\n.qa main header[data-v-69193267] {\n    width: 100%;\n    background: white;\n    border-radius: 20px 20px 0px 0px;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #CCCCCC;\n}\n.qa main footer[data-v-69193267] {\n    width: 100%;\n    position: absolute;\n    border-radius: 0px 0px 20px 20px;\n    height: 60px;\n    line-height: 60px;\n    bottom: 0;\n    background: white;\n}\n.qa section[data-v-69193267] {\n    margin-top: 12px;\n    margin-left: 8px;\n    margin-right: 8px;\n}\n.qa footer[data-v-69193267] {\n}\n.qa footer input[data-v-69193267] {\n    border: none;\n    height: 30px;\n    margin-right: 12px;\n    margin-left: 12px;\n    width: 90%;\n    color: #383434;\n}\n.qa footer input[data-v-69193267]:focus {\n    outline: -webkit-focus-ring-color auto 5px;\n    outline-color: white;\n    outline-style: auto;\n    outline-width: 5px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 227 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Question__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Question___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Question__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Answer__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Answer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Answer__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "QA",
+    components: {
+        Question: __WEBPACK_IMPORTED_MODULE_0__Question___default.a,
+        Answer: __WEBPACK_IMPORTED_MODULE_1__Answer___default.a
+    },
+    data: function data() {
+        return {
+            question: '很高兴遇见',
+            answer: '哎呦,不错哦',
+            askMsg: ''
+        };
+    },
+
+    methods: {
+        ask: function ask() {
+            var askMsg = this.askMsg;
+            this.askMsg = '';
+            var qa = document.querySelector('#qaBody');
+            console.log(askMsg);
+            console.log(qa);
+
+            var outterDiv = document.createElement("div");
+            outterDiv.setAttribute('class', 'line');
+
+            var innerDiv = document.createElement("div");
+            innerDiv.setAttribute('class', 'common question');
+            innerDiv.innerText = Q;
+
+            outterDiv.appendChild(innerDiv);
+            qa.appendChild(outterDiv);
+
+            // axios.get('/app/ask')
+            //     .then((response) => {
+            //
+            //     })
+            //     .catch( (error) => {
+            //
+            //     });
+        }
+    }
+});
+
+/***/ }),
+/* 228 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "qa" }, [
+    _c("main", [
+      _c("header", [_vm._v("与AI聊天中")]),
+      _vm._v(" "),
+      _c(
+        "section",
+        { attrs: { id: "qaBody" } },
+        [
+          _c("Question", { attrs: { question: _vm.question } }),
+          _vm._v(" "),
+          _c("Answer", { attrs: { answer: _vm.answer } })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("footer", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model.trim",
+              value: _vm.askMsg,
+              expression: "askMsg",
+              modifiers: { trim: true }
+            }
+          ],
+          attrs: { type: "text", placeholder: "说点什么..." },
+          domProps: { value: _vm.askMsg },
+          on: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              _vm.ask()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.askMsg = $event.target.value.trim()
+            },
+            blur: function($event) {
+              _vm.$forceUpdate()
+            }
+          }
+        })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-69193267", module.exports)
+  }
+}
+
+/***/ }),
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(236)
+}
+var normalizeComponent = __webpack_require__(49)
+/* script */
+var __vue_script__ = __webpack_require__(238)
+/* template */
+var __vue_template__ = __webpack_require__(239)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-417b5bc6"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Question.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-417b5bc6", Component.options)
+  } else {
+    hotAPI.reload("data-v-417b5bc6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(237);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(48)("9fcc0c60", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-417b5bc6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Question.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-417b5bc6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Question.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(25)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.question[data-v-417b5bc6] {\n    max-width: 280px;\n}\n.question  .line[data-v-417b5bc6] {\n    margin-top: 14px;\n    display: inline-block;\n}\n.question  .que[data-v-417b5bc6] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    border-radius: 60px/20px 40px 70px 100px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 238 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -91212,12 +91462,143 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Question",
+    props: ["question"],
+    data: function data() {
+        return {
+            msg: ''
+        };
+    },
+
+    methods: {},
+    mounted: function mounted() {
+        this.msg = this.question;
+    }
+});
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "question" }, [
+    _c("div", { staticClass: "line" }, [
+      _c("div", { staticClass: "que" }, [_vm._v(_vm._s(_vm.msg))])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-417b5bc6", module.exports)
+  }
+}
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(241)
+}
+var normalizeComponent = __webpack_require__(49)
+/* script */
+var __vue_script__ = __webpack_require__(243)
+/* template */
+var __vue_template__ = __webpack_require__(244)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3f387496"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Answer.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3f387496", Component.options)
+  } else {
+    hotAPI.reload("data-v-3f387496", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(242);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(48)("46446a96", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f387496\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Answer.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3f387496\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Answer.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 242 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(25)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.answer[data-v-3f387496] {\n}\n.answer  .line[data-v-3f387496] {\n    margin-top: 14px;\n}\n.answer  .ans[data-v-3f387496] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    float: right;\n    border-radius: 10px 30px 70px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 243 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -91228,56 +91609,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "QA",
+    name: "Answer",
+    props: ["answer"],
     data: function data() {
-        return {};
+        return {
+            msg: ''
+        };
+    },
+
+    methods: {},
+    mounted: function mounted() {
+        this.msg = this.answer;
     }
 });
 
 /***/ }),
-/* 228 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "qa" }, [
-      _c("main", [
-        _c("header", [_vm._v("与AI聊天中")]),
-        _vm._v(" "),
-        _c("section", [
-          _c("div", { staticClass: "line" }, [
-            _c("div", { staticClass: "common question" }, [
-              _vm._v("很高兴遇见你")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "line" }, [
-            _c("div", { staticClass: "common answer" }, [_vm._v("哎呦,不错哦")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("footer", [
-          _c("input", { attrs: { type: "text", placeholder: "说点什么..." } })
-        ])
-      ])
+  return _c("div", { staticClass: "answer" }, [
+    _c("div", { staticClass: "line" }, [
+      _c("div", { staticClass: "ans" }, [_vm._v(_vm._s(_vm.msg))])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-69193267", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3f387496", module.exports)
   }
 }
 

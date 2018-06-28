@@ -2,32 +2,72 @@
     <div class="qa">
         <main>
             <header>与AI聊天中</header>
-            <section>
+            <section id = "qaBody">
+                <Question
+                   :question = 'question'
+                ></Question>
 
-                <div class="line">
-                    <div class="common question">很高兴遇见你</div>
-                </div>
-
-                <div class="line">
-                    <div class="common answer">哎呦,不错哦</div>
-                </div>
-
+                <Answer
+                    :answer = 'answer'
+                ></Answer>
             </section>
+
+
             <footer>
-                <input type="text" placeholder="说点什么...">
+                <input
+                        v-model.trim = "askMsg"
+                        type="text"
+                        placeholder="说点什么..."
+                        @keyup.enter="ask()">
             </footer>
         </main>
     </div>
 </template>
 
 <script>
+    import Question from './Question'
+    import Answer from './Answer'
     export default {
         name: "QA",
+        components: {
+            Question,
+            Answer
+        },
         data() {
             return {
-            
+                question: '很高兴遇见',
+                answer: '哎呦,不错哦',
+                askMsg: ''
             }
         },
+        methods: {
+            ask() {
+                let askMsg = this.askMsg;
+                this.askMsg = '';
+                let qa = document.querySelector('#qaBody');
+                console.log(askMsg);
+                console.log(qa);
+
+                let outterDiv = document.createElement("div");
+                outterDiv.setAttribute('class', 'line');
+
+                let innerDiv = document.createElement("div");
+                innerDiv.setAttribute('class', 'common question');
+                innerDiv.innerText = Q;
+
+                outterDiv.appendChild(innerDiv);
+                qa.appendChild(outterDiv);
+
+                // axios.get('/app/ask')
+                //     .then((response) => {
+                //
+                //     })
+                //     .catch( (error) => {
+                //
+                //     });
+            }
+
+        }
     }
 </script>
 
@@ -68,34 +108,6 @@
         margin-top: 12px;
         margin-left: 8px;
         margin-right: 8px;
-    }
-
-    .qa section .line {
-        margin-top: 14px;
-    }
-
-    .qa section .common {
-        display: inline-block;
-        min-width: 30px;
-        max-width: 280px;
-        min-height: 38px;
-        line-height: 22px;
-        font-size: 14px;
-    }
-
-    .qa section .question {
-        background: white;
-        color: #383434;
-        padding: 5px 15px;
-        border-radius: 60px/20px 40px 70px 100px;
-    }
-
-    .qa section .answer {
-        background: white;
-        color: #383434;
-        padding: 5px 15px;
-        float: right;
-        border-radius: 10px 30px 70px;
     }
 
     .qa footer {}

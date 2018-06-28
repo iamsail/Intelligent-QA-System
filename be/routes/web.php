@@ -27,10 +27,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
-//　登录界面视图
-Route::get('/', function () {
-    return view('qa');
-});
+
 
 //　获取用户名
 Route::get('/username', 'AppController@getUsername');
@@ -46,3 +43,22 @@ Route::delete('/QA/all/', 'AppController@clearAllQA');
 
 //　新增QA对
 Route::post('/QA/', 'AppController@addQA');
+
+
+
+// ================================= 以下是面向用户的路由
+
+//　登录界面视图
+Route::get('/', function () {
+    return view('qa');
+});
+
+
+//　登录界面视图
+Route::get('/app', function () {
+    return view('qa');
+});
+
+
+//　用户提问
+Route::get('/app/ask', 'AppController@ask');
