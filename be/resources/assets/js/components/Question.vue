@@ -26,13 +26,13 @@
 
 <style scoped>
     .question {
-        max-width: 280px;
+        display: flex;
+        justify-content: flex-start;
     }
 
 
     .question  .line {
         margin-top: 14px;
-        display: inline-block;
     }
 
     .question  .que {

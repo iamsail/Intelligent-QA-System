@@ -26,7 +26,8 @@
 
 <style scoped>
     .answer {
-
+        display: flex;
+        justify-content: flex-end;
     }
 
 

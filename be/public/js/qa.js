@@ -91193,7 +91193,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.qa[data-v-69193267] {\n    -webkit-box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n            box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n    position: relative;\n    left: 50%;\n    width: 370px;\n    height: 90vh;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    margin-top: 5vh;\n    border-radius: 20px;\n    background: skyblue;\n}\n.qa main header[data-v-69193267] {\n    width: 100%;\n    background: white;\n    border-radius: 20px 20px 0px 0px;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #CCCCCC;\n}\n.qa main footer[data-v-69193267] {\n    width: 100%;\n    position: absolute;\n    border-radius: 0px 0px 20px 20px;\n    height: 60px;\n    line-height: 60px;\n    bottom: 0;\n    background: white;\n}\n.qa section[data-v-69193267] {\n    margin-top: 12px;\n    margin-left: 8px;\n    margin-right: 8px;\n}\n.qa footer[data-v-69193267] {\n}\n.qa footer input[data-v-69193267] {\n    border: none;\n    height: 30px;\n    margin-right: 12px;\n    margin-left: 12px;\n    width: 90%;\n    color: #383434;\n}\n.qa footer input[data-v-69193267]:focus {\n    outline: -webkit-focus-ring-color auto 5px;\n    outline-color: white;\n    outline-style: auto;\n    outline-width: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.qa[data-v-69193267] {\n    -webkit-box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n            box-shadow: 0 0 30px 0 rgba(34,195,170,0.5);\n    position: relative;\n    left: 50%;\n    width: 370px;\n    height: 90vh;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    margin-top: 5vh;\n    border-radius: 20px;\n    background: skyblue;\n}\n.qa main header[data-v-69193267] {\n    width: 100%;\n    background: white;\n    border-radius: 20px 20px 0px 0px;\n    height: 40px;\n    line-height: 40px;\n    text-align: center;\n    color: #CCCCCC;\n}\n.qa main footer[data-v-69193267] {\n    width: 100%;\n    position: absolute;\n    border-radius: 0px 0px 20px 20px;\n    height: 60px;\n    line-height: 60px;\n    bottom: 0;\n    background: white;\n}\n.qa section[data-v-69193267] {\n    margin-left: 8px;\n    padding-right: 8px;\n    overflow: auto;\n    max-height: calc(90vh - 100px);\n}\n.qa footer[data-v-69193267] {\n}\n.qa footer input[data-v-69193267] {\n    border: none;\n    height: 30px;\n    margin-right: 12px;\n    margin-left: 12px;\n    width: 90%;\n    color: #383434;\n}\n.qa footer input[data-v-69193267]:focus {\n    outline: -webkit-focus-ring-color auto 5px;\n    outline-color: white;\n    outline-style: auto;\n    outline-width: 5px;\n}\n[data-v-69193267]::-webkit-scrollbar {\n    width: 5px;\n    height: 10px;\n}\n\n\n/*滑块*/\n[data-v-69193267]::-webkit-scrollbar-thumb {\n    background-color: #B5F8EC;\n    border-radius: 10px;\n}\n[data-v-69193267]::-webkit-scrollbar-thumb:hover {\n    background-color: #777;\n}\n\n\n/*滑道*/\n[data-v-69193267]::-webkit-scrollbar-track {#B5F8EC\n    box-shadow: inset 0 0 6px #B5F8EC;\n    border-radius: 10px;\n}\n", ""]);
 
 // exports
 
@@ -91234,6 +91234,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -91245,37 +91254,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            question: '很高兴遇见',
+            question: '我是智能AI机器人,小矿...　正在紧张开发中',
             answer: '哎呦,不错哦',
-            askMsg: ''
+            askMsg: '',
+            QA: []
         };
     },
 
     methods: {
         ask: function ask() {
-            var askMsg = this.askMsg;
+            var _this = this;
+
+            var temp = {
+                que: '',
+                ans: ''
+            };
+
+            temp.que = this.askMsg;
             this.askMsg = '';
-            var qa = document.querySelector('#qaBody');
-            console.log(askMsg);
-            console.log(qa);
 
-            var outterDiv = document.createElement("div");
-            outterDiv.setAttribute('class', 'line');
-
-            var innerDiv = document.createElement("div");
-            innerDiv.setAttribute('class', 'common question');
-            innerDiv.innerText = Q;
-
-            outterDiv.appendChild(innerDiv);
-            qa.appendChild(outterDiv);
-
-            // axios.get('/app/ask')
-            //     .then((response) => {
-            //
-            //     })
-            //     .catch( (error) => {
-            //
-            //     });
+            axios.get('/app/ask').then(function (response) {
+                temp.ans = response.data;
+                if (temp.ans) {
+                    _this.QA.push(temp);
+                }
+            }).catch(function (error) {});
         }
     }
 });
@@ -91298,9 +91301,21 @@ var render = function() {
         [
           _c("Question", { attrs: { question: _vm.question } }),
           _vm._v(" "),
-          _c("Answer", { attrs: { answer: _vm.answer } })
+          _c("Answer", { attrs: { answer: _vm.answer } }),
+          _vm._v(" "),
+          _vm._l(_vm.QA, function(item) {
+            return _c(
+              "div",
+              [
+                _c("Question", { attrs: { question: item.que } }),
+                _vm._v(" "),
+                _c("Answer", { attrs: { answer: item.ans } })
+              ],
+              1
+            )
+          })
         ],
-        1
+        2
       ),
       _vm._v(" "),
       _c("footer", [
@@ -91314,7 +91329,7 @@ var render = function() {
               modifiers: { trim: true }
             }
           ],
-          attrs: { type: "text", placeholder: "说点什么..." },
+          attrs: { type: "text", placeholder: "问点什么..." },
           domProps: { value: _vm.askMsg },
           on: {
             keyup: function($event) {
@@ -91443,7 +91458,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.question[data-v-417b5bc6] {\n    max-width: 280px;\n}\n.question  .line[data-v-417b5bc6] {\n    margin-top: 14px;\n    display: inline-block;\n}\n.question  .que[data-v-417b5bc6] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    border-radius: 60px/20px 40px 70px 100px;\n}\n\n", ""]);
+exports.push([module.i, "\n.question[data-v-417b5bc6] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n}\n.question  .line[data-v-417b5bc6] {\n    margin-top: 14px;\n}\n.question  .que[data-v-417b5bc6] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    border-radius: 60px/20px 40px 70px 100px;\n}\n\n", ""]);
 
 // exports
 
@@ -91588,7 +91603,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.answer[data-v-3f387496] {\n}\n.answer  .line[data-v-3f387496] {\n    margin-top: 14px;\n}\n.answer  .ans[data-v-3f387496] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    float: right;\n    border-radius: 10px 30px 70px;\n}\n\n", ""]);
+exports.push([module.i, "\n.answer[data-v-3f387496] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n}\n.answer  .line[data-v-3f387496] {\n    margin-top: 14px;\n}\n.answer  .ans[data-v-3f387496] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    float: right;\n    border-radius: 10px 30px 70px;\n}\n\n", ""]);
 
 // exports
 

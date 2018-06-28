@@ -3,6 +3,7 @@
         <main>
             <header>与AI聊天中</header>
             <section id = "qaBody">
+
                 <Question
                    :question = 'question'
                 ></Question>
@@ -10,14 +11,22 @@
                 <Answer
                     :answer = 'answer'
                 ></Answer>
+
+                <div v-for = "item in QA">
+                    <Question
+                        :question = 'item.que'
+                    ></Question>
+                    <Answer
+                        :answer = 'item.ans'
+                    ></Answer>
+                </div>
+
             </section>
-
-
             <footer>
                 <input
                         v-model.trim = "askMsg"
                         type="text"
-                        placeholder="说点什么..."
+                        placeholder="问点什么..."
                         @keyup.enter="ask()">
             </footer>
         </main>
@@ -35,36 +44,34 @@
         },
         data() {
             return {
-                question: '很高兴遇见',
+                question: '我是智能AI机器人,小矿...　正在紧张开发中',
                 answer: '哎呦,不错哦',
-                askMsg: ''
+                askMsg: '',
+                QA: []
             }
         },
         methods: {
             ask() {
-                let askMsg = this.askMsg;
+                let temp = {
+                    que: '',
+                    ans: ''
+                };
+
+                temp.que = this.askMsg;
                 this.askMsg = '';
-                let qa = document.querySelector('#qaBody');
-                console.log(askMsg);
-                console.log(qa);
 
-                let outterDiv = document.createElement("div");
-                outterDiv.setAttribute('class', 'line');
 
-                let innerDiv = document.createElement("div");
-                innerDiv.setAttribute('class', 'common question');
-                innerDiv.innerText = Q;
 
-                outterDiv.appendChild(innerDiv);
-                qa.appendChild(outterDiv);
+                axios.get('/app/ask')
+                    .then((response) => {
+                        temp.ans = response.data;
+                        if (temp.ans) {
+                            this.QA.push(temp);
+                        }
+                    })
+                    .catch( (error) => {
 
-                // axios.get('/app/ask')
-                //     .then((response) => {
-                //
-                //     })
-                //     .catch( (error) => {
-                //
-                //     });
+                    });
             }
 
         }
@@ -105,9 +112,10 @@
     }
 
     .qa section {
-        margin-top: 12px;
         margin-left: 8px;
-        margin-right: 8px;
+        padding-right: 8px;
+        overflow: auto;
+        max-height: calc(90vh - 100px);
     }
 
     .qa footer {}
@@ -126,5 +134,30 @@
         outline-color: white;
         outline-style: auto;
         outline-width: 5px;
+    }
+
+
+
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 10px;
+    }
+
+
+    /*滑块*/
+    ::-webkit-scrollbar-thumb {
+        background-color: #B5F8EC;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #777;
+    }
+
+
+    /*滑道*/
+    ::-webkit-scrollbar-track {#B5F8EC
+        box-shadow: inset 0 0 6px #B5F8EC;
+        border-radius: 10px;
     }
 </style>
