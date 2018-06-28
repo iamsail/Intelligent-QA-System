@@ -91528,7 +91528,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n@-webkit-keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n@keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n.QA-table .el-table tbody .cell {\n    white-space:nowrap;\n    text-overflow:ellipsis;\n    min-height: 30px;\n}\n.QA-table .el-table tbody .cell:hover {\n    -webkit-animation: typing .1s 1s ease-out both;\n            animation: typing .1s 1s ease-out both;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n", ""]);
+exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n@-webkit-keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n@keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n.QA-table .el-table tbody .cell {\n    white-space:nowrap;\n    text-overflow:ellipsis;\n    min-height: 30px;\n}\n.QA-table .el-table tbody .cell:hover {\n    -webkit-animation: typing .1s .5s ease-out both;\n            animation: typing .1s .5s ease-out both;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n", ""]);
 
 // exports
 

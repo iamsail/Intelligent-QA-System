@@ -91263,8 +91263,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         ask: function ask() {
-            var _this = this;
-
             var temp = {
                 que: '',
                 ans: ''
@@ -91273,12 +91271,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             temp.que = this.askMsg;
             this.askMsg = '';
 
-            axios.get('/app/ask').then(function (response) {
-                temp.ans = response.data;
-                if (temp.ans) {
-                    _this.QA.push(temp);
-                }
-            }).catch(function (error) {});
+            this.QA.push(temp);
+            // axios.get('/app/ask')
+            //     .then((response) => {
+            //         temp.ans = response.data;
+            //         if (temp.ans) {
+            //             this.QA.push(temp);
+            //         }
+            //     })
+            //     .catch( (error) => {
+            //
+            //     });
         }
     }
 });

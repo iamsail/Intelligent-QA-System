@@ -84,7 +84,7 @@ def filter_tags(List):
     Returns：
         tagList: 过滤了无意义的taglist
     """
-    useless_tags = ['帮助中心','FAQ']
+    useless_tags = ['帮助中心','FAQ', '常见问题']
     tagList = []
     for tag in List:
         if tag not in useless_tags:
@@ -127,8 +127,6 @@ def hand_row_QA(rowQ, rowA):
 
 
 
-
-
 def cut_words(tagList):
     """　分词and词性标注　　
 
@@ -149,6 +147,8 @@ def cut_words(tagList):
         wordPairs: 分词后的单词与词性对
     """
 
+    # python hand_files.py | grep - E '什么|怎样|什么是|为什么'
+
     wordPairs = []
 
     # 最后一个tag如果是英文,考虑不要分词　hold
@@ -157,6 +157,7 @@ def cut_words(tagList):
         for ele in seg:
             wordPairs.append(ele)
 
+    # print(wordPairs)
     return wordPairs
     # get_Q_by_rules(wordPairs, tagList)
     # print()
@@ -208,7 +209,13 @@ def get_QA(dir):
     Returns：
     """
     # validFileSets = get_valid_files_list(dir, 1055, 1155)
-    validFileSets = get_valid_files_list(dir, 1059, 1060)
+
+    #　这是对规则一的测试数据
+    # validFileSets = get_valid_files_list(dir, 1059, 1060)
+
+
+
+    validFileSets = get_valid_files_list(dir, 1, 100)
     for i,file in enumerate(validFileSets):
         rowQ, rowA = get_QA_raw_info(file)
         tagList, answer = hand_row_QA(rowQ, rowA)
@@ -219,11 +226,12 @@ def get_QA(dir):
         question = generate_Q(tagList)
 
         if question:
+            # print(question)
+            # print(answer)
             QALink = 'https://%s' % (file)
+            # print(QALink)
+            # print()
             save_QA(question, answer, QALink)
-
-
-
 
 
 get_QA('../../test-data/support.huaweicloud.com')

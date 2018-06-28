@@ -11,7 +11,9 @@
 
 # 这一步最为重要，基于规则目前考虑了以下几种情况：
 #
-# 一、假如只有一个有用标签或最后一个标签包含“简介”，则直接使用“什么是… …？”来生成问题。如：“帮助中心 > 机器学习服务”。
+# 规则1、假如只有一个有用标签或最后一个标签包含“简介”，则直接使用“什么是… …？”来生成问题。如：“帮助中心 > 机器学习服务”。
+#
+# 规则2: 若最后一个标签已?/？结尾,则直接将最后一个标签提取为问题
 #
 # 二、假如最后一个标签的开头是疑问词，则不需要生成问题。如：“帮助中心 > 机器学习服务 > 什么是机器学习服务”。
 #
@@ -38,7 +40,8 @@
 def rule1(wordPairs, tagList):
     """　基于规则1生成问题
 
-    规则1: 假如只有一个有用标签或最后一个标签包含“简介”，则直接使用“什么是… …？”来生成问题。如：“帮助中心 > 机器学习服务”。
+    规则1: 假如只有一个有用标签，则直接使用“什么是… …？”来生成问题。如：“帮助中心 > 机器学习服务”。
+     or 假如最后一个标签包含“简介”，则直接使用“什么是… …？”来生成问题。如：“帮助中心 > 机器学习服务”。
 
     Args:
        wordPairs: 分词后的单词与词性对
@@ -49,12 +52,33 @@ def rule1(wordPairs, tagList):
     """
     question = ''
     if len(wordPairs) == 1:
-        question = "什么是%s ?"%(str(wordPairs).split('/')[0])
+        question = "什么是%s?"%(str(wordPairs).split('/')[0])
     elif '简介' in wordPairs[len(wordPairs) - 1]:
-        question = "什么是%s ?"%(tagList[len(tagList) - 1])
+        question = "%s是什么?"%(tagList[len(tagList) - 1])
 
     return question
 
+
+
+def rule2(wordPairs, tagList):
+    """　基于规则2生成问题
+
+        规则2: 假如最后一个标签的开头是疑问词，则不需要生成问题。如：“帮助中心 > 机器学习服务 > 什么是机器学习服务”。
+
+        Args:
+           wordPairs: 分词后的单词与词性对
+           tagList: 问题标签(Q)集合
+
+        Returns:
+           question: 提取出的问题
+        """
+    question = ''
+    lastChar = str(wordPairs[len(wordPairs) - 1]).split('/')[0]
+    if lastChar == '?' or lastChar == '？':
+        question = tagList[len(tagList) - 1]
+        # print(question)
+
+    return question
 
 
 def get_Q_by_rules(wordPairs, tagList):
@@ -71,6 +95,15 @@ def get_Q_by_rules(wordPairs, tagList):
     if(rule1(wordPairs, tagList)):
         question = rule1(wordPairs, tagList)
 
+    elif(rule2(wordPairs, tagList)):
+        question = rule2(wordPairs, tagList)
+
+    # if question != '':
+    #     print(question)
+
     return question
+    # if question:
+    #     print(question)
+
 
 

@@ -98,7 +98,7 @@
     }
 
     .QA-table .el-table tbody .cell:hover {
-        animation: typing .1s 1s ease-out both;
+        animation: typing .1s .5s ease-out both;
         animation-fill-mode: forwards;
     }
 </style>
