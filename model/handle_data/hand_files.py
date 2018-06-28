@@ -215,7 +215,7 @@ def get_QA(dir):
 
 
 
-    validFileSets = get_valid_files_list(dir, 1, 100)
+    validFileSets = get_valid_files_list(dir, 1, 3300)
     for i,file in enumerate(validFileSets):
         rowQ, rowA = get_QA_raw_info(file)
         tagList, answer = hand_row_QA(rowQ, rowA)

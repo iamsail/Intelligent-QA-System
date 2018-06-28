@@ -15,13 +15,16 @@ class AppController
     /**
      * 获取所有QA对
      *
+     * @param  {Request} $request 用户请求
      * @return {array}　$arr  QA对
      */
-    public function getQA() {
-        $arr = array();
-        $arr['QA'] = DB::select('select * from all_QA');
+    public function getQA(Request $request) {
+        $input = $request->all();
+        $arr = DB::table('all_QA')->paginate($input["pageSize"]);
         return $arr;
     }
+
+
 
     /**
      * 用户登录

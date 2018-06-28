@@ -91528,7 +91528,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n@-webkit-keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n@keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n.QA-table .el-table tbody .cell {\n    white-space:nowrap;\n    text-overflow:ellipsis;\n    min-height: 30px;\n}\n.QA-table .el-table tbody .cell:hover {\n    -webkit-animation: typing .1s .5s ease-out both;\n            animation: typing .1s .5s ease-out both;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n", ""]);
+exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n@-webkit-keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n@keyframes typing {\n0% {\n        white-space:nowrap;\n}\n100% {\n        white-space:normal;\n}\n}\n.QA-table .el-table tbody .cell {\n    white-space:nowrap;\n    text-overflow:ellipsis;\n    min-height: 30px;\n}\n.QA-table .el-table tbody .cell:hover {\n    -webkit-animation: typing .1s .5s ease-out both;\n            animation: typing .1s .5s ease-out both;\n    -webkit-animation-fill-mode: forwards;\n            animation-fill-mode: forwards;\n}\n.QA-table .cut-page {\n    margin-top: 20px;\n    margin-bottom: 20px;\n}\n.QA-table .el-pagination {\n    text-align: center;\n}\n", ""]);
 
 // exports
 
@@ -91539,6 +91539,21 @@ exports.push([module.i, "\n.QA-table .el-table {\n    /*margin: 0 auto;*/\n}\n@-
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -91596,11 +91611,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getQA: function getQA() {
             var _this = this;
 
-            axios.get('/QA').then(function (response) {
-                var QA = response.data.QA;
-                QA.forEach(function (val) {
-                    _this.tableData.push(val);
-                });
+            axios.get("/QA?pageSize=" + this.pageSize).then(function (response) {
+                var QA = response.data;
+                _this.QANums = QA.total;
+                _this.dataPath = QA.path + "?page=";
+                _this.renderTableQA(QA.data);
+            }).catch(function (error) {});
+        },
+
+
+        /**
+         * 将QA对渲染到页面
+         *
+         * @param data 将QA对数据渲染到页面
+         */
+        renderTableQA: function renderTableQA(data) {
+            var _this2 = this;
+
+            data.forEach(function (val) {
+                _this2.tableData.push(val);
+            });
+        },
+
+
+        /**
+         * 改变每个页面的显示的QA对数量
+         *
+         * @param val 每页展示多少条数据
+         */
+        handleSizeChange: function handleSizeChange(val) {
+            this.pageSize = val;
+            this.getQA();
+        },
+
+
+        /**
+         * 页面跳转
+         *
+         * @param val 跳转的页码
+         */
+        handleCurrentChange: function handleCurrentChange(val) {
+            var _this3 = this;
+
+            var url = "" + this.dataPath + val + "&pageSize=" + this.pageSize;
+            axios.get(url).then(function (response) {
+                _this3.tableData = [];
+                _this3.renderTableQA(response.data.data);
             }).catch(function (error) {});
         }
     },
@@ -91609,7 +91665,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            tableData: []
+            tableData: [],
+            currentPage: 1,
+            QANums: 0,
+            dataPath: '',
+            pageSize: 100
         };
     }
 });
@@ -91622,70 +91682,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "QA-table" },
-    [
+  return _c("div", { staticClass: "QA-table" }, [
+    _c(
+      "section",
+      [
+        _c(
+          "el-table",
+          {
+            staticStyle: { width: "100%" },
+            attrs: { data: _vm.tableData, stripe: "", border: "" }
+          },
+          [
+            _c("el-table-column", {
+              attrs: {
+                prop: "id",
+                align: "center",
+                label: "问题id",
+                width: "80"
+              }
+            }),
+            _vm._v(" "),
+            _c("el-table-column", {
+              attrs: {
+                prop: "question",
+                align: "center",
+                label: "问题",
+                width: "240"
+              }
+            }),
+            _vm._v(" "),
+            _c("el-table-column", {
+              attrs: {
+                prop: "theme",
+                align: "center",
+                width: "200",
+                label: "主题"
+              }
+            }),
+            _vm._v(" "),
+            _c("el-table-column", {
+              attrs: {
+                prop: "answer",
+                align: "center",
+                width: "350",
+                label: "答案"
+              }
+            }),
+            _vm._v(" "),
+            _c("el-table-column", {
+              attrs: {
+                prop: "answer_link",
+                width: "350",
+                align: "center",
+                label: "答案链接"
+              }
+            }),
+            _vm._v(" "),
+            _c("el-table-column", {
+              attrs: {
+                prop: "extend_question",
+                align: "center",
+                label: "扩展问题"
+              }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("section", { staticClass: "cut-page" }, [
       _c(
-        "el-table",
-        {
-          staticStyle: { width: "100%" },
-          attrs: { data: _vm.tableData, stripe: "", border: "" }
-        },
+        "div",
+        { staticClass: "block" },
         [
-          _c("el-table-column", {
-            attrs: { prop: "id", align: "center", label: "问题id", width: "80" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
+          _c("el-pagination", {
             attrs: {
-              prop: "question",
-              align: "center",
-              label: "问题",
-              width: "240"
-            }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: {
-              prop: "theme",
-              align: "center",
-              width: "200",
-              label: "主题"
-            }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: {
-              prop: "answer",
-              align: "center",
-              width: "350",
-              label: "答案"
-            }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: {
-              prop: "answer_link",
-              width: "350",
-              align: "center",
-              label: "答案链接"
-            }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: {
-              prop: "extend_question",
-              align: "center",
-              label: "扩展问题"
+              "current-page": _vm.currentPage,
+              "page-sizes": [100, 200, 300, 500, 1000],
+              "page-size": 100,
+              layout: "total, sizes, prev, pager, next, jumper",
+              total: _vm.QANums
+            },
+            on: {
+              "size-change": _vm.handleSizeChange,
+              "current-change": _vm.handleCurrentChange
             }
           })
         ],
         1
       )
-    ],
-    1
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
