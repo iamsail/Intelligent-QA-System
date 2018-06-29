@@ -91197,7 +91197,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "header" },
+    { staticClass: "header", attrs: { id: "header" } },
     [
       _c(
         "el-menu",
@@ -91392,7 +91392,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.app[data-v-8142f38c] {\n}\n.app .left[data-v-8142f38c]{\n    display: inline-block;\n    width: 80%;\n}\n.app .right[data-v-8142f38c]{\n    width: 20%;\n    min-height: 900px;\n    height: 100%;\n    float: right;\n    border: 2px solid red;\n}\n", ""]);
+exports.push([module.i, "\n.app[data-v-8142f38c] {\n}\n.app .left[data-v-8142f38c]{\n    display: inline-block;\n    width: 80%;\n}\n.app .right[data-v-8142f38c]{\n    width: 20%;\n    min-height: 900px;\n    height: 100%;\n    border: 2px solid red;\n}\n.app .fixed[data-v-8142f38c] {\n    position: fixed;\n    top: 0px;\n    right: 0;\n}\n.app .normal[data-v-8142f38c]{\n    position: static;\n    float: right;\n}\n", ""]);
 
 // exports
 
@@ -91423,6 +91423,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -91430,7 +91432,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "App",
     data: function data() {
-        return {};
+        return {
+            flag: false,
+            compareHeight: null
+        };
     },
 
     components: {
@@ -91438,8 +91443,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         Header: __WEBPACK_IMPORTED_MODULE_0__common_Header___default.a,
         AdminCenter: __WEBPACK_IMPORTED_MODULE_2__AdminCenter___default.a
     },
-    methods: {},
-    mounted: function mounted() {}
+    methods: {
+        handleScroll: function handleScroll() {
+            var scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
+            this.fixed(scrollTop);
+        },
+        setCompareHeight: function setCompareHeight() {
+            var header = document.querySelector('#header');
+            this.compareHeight = parseInt(window.getComputedStyle(header).getPropertyValue("height"));
+        },
+        fixed: function fixed(scrollTop) {
+            console.log(this.compareHeight);
+            if (scrollTop > this.compareHeight) {
+                console.log(scrollTop);
+                this.flag = true;
+            } else {
+                this.flag = false;
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.setCompareHeight();
+        window.addEventListener('scroll', this.handleScroll); // 添加滚动事件
+    }
 });
 
 /***/ }),
@@ -92313,7 +92339,15 @@ var render = function() {
       _c("main", [
         _c("section", { staticClass: "left" }, [_c("Table")], 1),
         _vm._v(" "),
-        _c("section", { staticClass: "right" }, [_c("AdminCenter")], 1)
+        _c(
+          "section",
+          {
+            staticClass: "right",
+            class: { fixed: _vm.flag, normal: !_vm.flag }
+          },
+          [_c("AdminCenter")],
+          1
+        )
       ])
     ],
     1

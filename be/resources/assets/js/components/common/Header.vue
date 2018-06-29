@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="header" id="header">
         <el-menu
                 :default-active="activeIndex"
                 class="el-menu-demo"

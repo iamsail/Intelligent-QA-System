@@ -113,7 +113,9 @@
 </script>
 
 <style scoped>
-    .admin-center {}
+    .admin-center {
+
+    }
 
     .admin-center h1{
         background: skyblue;
