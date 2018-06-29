@@ -15,7 +15,6 @@
 #
 # 规则2: 若最后一个标签已?/？结尾,则直接将最后一个标签提取为问题
 #
-# 二、假如最后一个标签的开头是疑问词，则不需要生成问题。如：“帮助中心 > 机器学习服务 > 什么是机器学习服务”。
 #
 # 三、假如最后一个标签是“概述”或者“产品概述”，则用第一个标签和倒数第二个标签生成问题。如：“帮助中心 > 机器学习服务 > 产品介绍 > 产品概述”。
 #
@@ -79,6 +78,11 @@ def rule2(wordPairs, tagList):
         # print(question)
 
     return question
+
+
+
+def rule3(wordPairs, tagList):
+    pass
 
 
 def get_Q_by_rules(wordPairs, tagList):

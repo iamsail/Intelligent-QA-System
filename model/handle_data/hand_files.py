@@ -114,15 +114,24 @@ def hand_row_QA(rowQ, rowA):
         tagList.append(tag)
     tagList = " ".join(tagList).split(' > ')
 
+    tagList = filter_tags(tagList)
+    # 载入自定义词典
+    jieba.load_userdict('./dict.txt')
+    question = generate_Q(tagList)
 
-    COMMENT = r'<!--|//'
     Answer = ''
-    for val in rowA[0].stripped_strings:
-        val = "".join(val.split())
-        if(not re.match(COMMENT, val)):
-            Answer = '%s %s' % (Answer, val)
+    if question:
+        # print('que:',question)
+        COMMENT = r'<!--|//'
+        for val in rowA[0].stripped_strings:
+            val = "".join(val.split())
+            if(not re.match(COMMENT, val)):
+                if (not question in val):
+                    Answer = '%s %s' % (Answer, val)
 
-    return tagList, Answer
+        # print()
+        # print()
+    return question, Answer
 
 
 
@@ -178,6 +187,10 @@ def generate_Q(tagList):
     return Q
 
 
+def final_handle(question, answer):
+    pass
+
+
 def save_QA(question, answer, QALink):
     # Connect to the database
     connection = pymysql.connect(host='127.0.0.1',
@@ -189,9 +202,14 @@ def save_QA(question, answer, QALink):
 
     try:
         with connection.cursor() as cursor:
+            sql_exist = "SELECT question from all_QA where question = %s limit 1"
+            is_exist = cursor.execute(sql_exist, question)
+
+
             # Create a new record
-            sql = "INSERT INTO `all_QA` (`question`, `answer`, `answer_link`) VALUES (%s, %s, %s)"
-            cursor.execute(sql, (question, answer, QALink))
+            if not is_exist:
+                sql = "INSERT INTO `all_QA` (`question`, `answer`, `answer_link`) VALUES (%s, %s, %s)"
+                cursor.execute(sql, (question, answer, QALink))
 
         # connection is not autocommit by default. So you must commit to save
         # your changes.
@@ -215,21 +233,17 @@ def get_QA(dir):
 
 
 
-    validFileSets = get_valid_files_list(dir, 1, 3300)
+    validFileSets = get_valid_files_list(dir, 1, 50)
     for i,file in enumerate(validFileSets):
         rowQ, rowA = get_QA_raw_info(file)
-        tagList, answer = hand_row_QA(rowQ, rowA)
-        tagList = filter_tags(tagList)
-
-        # 载入自定义词典
-        jieba.load_userdict('./dict.txt')
-        question = generate_Q(tagList)
-
+        question, answer = hand_row_QA(rowQ, rowA)
         if question:
+            QALink = 'https://%s' % (file)
             # print(question)
             # print(answer)
-            QALink = 'https://%s' % (file)
             # print(QALink)
+            # print()
+            # print()
             # print()
             save_QA(question, answer, QALink)
 
