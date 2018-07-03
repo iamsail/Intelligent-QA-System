@@ -84,7 +84,7 @@ def filter_tags(List):
     Returns：
         tagList: 过滤了无意义的taglist
     """
-    useless_tags = ['帮助中心','FAQ', '常见问题']
+    useless_tags = ['帮助中心','FAQ', '常见问题', '借口参考']
     tagList = []
     for tag in List:
         if tag not in useless_tags:
@@ -235,7 +235,7 @@ def get_QA(dir):
     QAed = f.read()
     f.close()
 
-    validFileSets = get_valid_files_list(dir, 1, 100)
+    validFileSets = get_valid_files_list(dir, 1, 3500)
     for i,file in enumerate(validFileSets):
         if not file in QAed:
             rowQ, rowA = get_QA_raw_info(file)
@@ -250,7 +250,7 @@ def get_QA(dir):
                     # 这里如果我们保存了过后,就对这个文件名写的key写为1,以后训练的时候碰到为1的文章就不在进行提取qa
                     get_qa_str = '%s\n' % (file)
                     f.write(get_qa_str)
-                    # save_QA(question, answer, QALink)
+                    save_QA(question, answer, QALink)
 
 
 
