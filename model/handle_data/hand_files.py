@@ -231,21 +231,27 @@ def get_QA(dir):
     #　这是对规则一的测试数据
     # validFileSets = get_valid_files_list(dir, 1059, 1060)
 
+    f = open('../../chooesd.txt', 'r')
+    QAed = f.read()
+    f.close()
 
-
-    validFileSets = get_valid_files_list(dir, 1, 50)
+    validFileSets = get_valid_files_list(dir, 1, 100)
     for i,file in enumerate(validFileSets):
-        rowQ, rowA = get_QA_raw_info(file)
-        question, answer = hand_row_QA(rowQ, rowA)
-        if question:
-            QALink = 'https://%s' % (file)
-            # print(question)
-            # print(answer)
-            # print(QALink)
-            # print()
-            # print()
-            # print()
-            save_QA(question, answer, QALink)
+        if not file in QAed:
+            rowQ, rowA = get_QA_raw_info(file)
+            question, answer = hand_row_QA(rowQ, rowA)
+            with open('../../chooesd.txt', 'a') as f:
+                if question:
+                    QALink = 'https://%s' % (file)
+                    # print(question)
+                    # print(answer)
+                    # print(QALink)
+
+                    # 这里如果我们保存了过后,就对这个文件名写的key写为1,以后训练的时候碰到为1的文章就不在进行提取qa
+                    get_qa_str = '%s\n' % (file)
+                    f.write(get_qa_str)
+                    # save_QA(question, answer, QALink)
+
 
 
 get_QA('../../test-data/support.huaweicloud.com')
