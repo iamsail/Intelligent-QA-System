@@ -91273,8 +91273,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             temp.que = this.askMsg;
             this.askMsg = '';
 
-            axios.get('/app/ask').then(function (response) {
+            axios.get('/app/ask', {
+                params: {
+                    question: temp.que
+                }
+            }).then(function (response) {
                 temp.ans = response.data;
+                console.log(_this.QA.length);
                 if (temp.ans) {
                     _this.QA.push(temp);
                 }

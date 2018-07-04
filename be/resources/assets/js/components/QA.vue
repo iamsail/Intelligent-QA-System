@@ -61,18 +61,21 @@
                 this.askMsg = '';
 
 
-                axios.get('/app/ask')
-                    .then((response) => {
-                        temp.ans = response.data;
-                        if (temp.ans) {
-                            this.QA.push(temp);
-                        }
-                    })
+                axios.get('/app/ask', {
+                    params: {
+                        question: temp.que
+                    }
+                }).then((response) => {
+                    temp.ans = response.data;
+                    console.log(this.QA.length)
+                    if (temp.ans) {
+                        this.QA.push(temp);
+                    }
+                })
                     .catch( (error) => {
 
                     });
             }
-
         }
     }
 </script>
