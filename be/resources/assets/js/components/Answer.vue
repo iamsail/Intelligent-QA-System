@@ -47,6 +47,7 @@
         padding: 5px 15px;
         float: right;
         border-radius: 10px 30px 70px;
+        word-break: break-all;
     }
 
 </style>

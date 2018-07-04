@@ -61,4 +61,4 @@ Route::get('/app', function () {
 
 
 //　用户提问
-Route::get('/app/ask', 'AppController@ask');
+Route::get('/app/ask', 'FeController@ask');

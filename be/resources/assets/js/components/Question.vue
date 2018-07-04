@@ -46,6 +46,7 @@
         color: #383434;
         padding: 5px 15px;
         border-radius: 60px/20px 40px 70px 100px;
+        word-break: break-all;
     }
 
 </style>

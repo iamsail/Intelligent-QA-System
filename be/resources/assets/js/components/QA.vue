@@ -61,17 +61,16 @@
                 this.askMsg = '';
 
 
-                this.QA.push(temp);
-                // axios.get('/app/ask')
-                //     .then((response) => {
-                //         temp.ans = response.data;
-                //         if (temp.ans) {
-                //             this.QA.push(temp);
-                //         }
-                //     })
-                //     .catch( (error) => {
-                //
-                //     });
+                axios.get('/app/ask')
+                    .then((response) => {
+                        temp.ans = response.data;
+                        if (temp.ans) {
+                            this.QA.push(temp);
+                        }
+                    })
+                    .catch( (error) => {
+
+                    });
             }
 
         }

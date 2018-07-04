@@ -235,7 +235,7 @@ def get_QA(dir):
     QAed = f.read()
     f.close()
 
-    validFileSets = get_valid_files_list(dir, 1, 3500)
+    validFileSets = get_valid_files_list(dir, 1, 3700)
     for i,file in enumerate(validFileSets):
         if not file in QAed:
             rowQ, rowA = get_QA_raw_info(file)

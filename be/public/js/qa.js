@@ -91263,6 +91263,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         ask: function ask() {
+            var _this = this;
+
             var temp = {
                 que: '',
                 ans: ''
@@ -91271,17 +91273,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             temp.que = this.askMsg;
             this.askMsg = '';
 
-            this.QA.push(temp);
-            // axios.get('/app/ask')
-            //     .then((response) => {
-            //         temp.ans = response.data;
-            //         if (temp.ans) {
-            //             this.QA.push(temp);
-            //         }
-            //     })
-            //     .catch( (error) => {
-            //
-            //     });
+            axios.get('/app/ask').then(function (response) {
+                temp.ans = response.data;
+                if (temp.ans) {
+                    _this.QA.push(temp);
+                }
+            }).catch(function (error) {});
         }
     }
 });
@@ -91372,7 +91369,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.question[data-v-417b5bc6] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n}\n.question  .line[data-v-417b5bc6] {\n    margin-top: 14px;\n}\n.question  .que[data-v-417b5bc6] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    border-radius: 60px/20px 40px 70px 100px;\n}\n\n", ""]);
+exports.push([module.i, "\n.question[data-v-417b5bc6] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: start;\n        -ms-flex-pack: start;\n            justify-content: flex-start;\n}\n.question  .line[data-v-417b5bc6] {\n    margin-top: 14px;\n}\n.question  .que[data-v-417b5bc6] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    border-radius: 60px/20px 40px 70px 100px;\n    word-break: break-all;\n}\n\n", ""]);
 
 // exports
 
@@ -91517,7 +91514,7 @@ exports = module.exports = __webpack_require__(25)(false);
 
 
 // module
-exports.push([module.i, "\n.answer[data-v-3f387496] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n}\n.answer  .line[data-v-3f387496] {\n    margin-top: 14px;\n}\n.answer  .ans[data-v-3f387496] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    float: right;\n    border-radius: 10px 30px 70px;\n}\n\n", ""]);
+exports.push([module.i, "\n.answer[data-v-3f387496] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: end;\n        -ms-flex-pack: end;\n            justify-content: flex-end;\n}\n.answer  .line[data-v-3f387496] {\n    margin-top: 14px;\n}\n.answer  .ans[data-v-3f387496] {\n    display: inline-block;\n    min-width: 30px;\n    max-width: 280px;\n    min-height: 38px;\n    line-height: 22px;\n    font-size: 14px;\n    background: white;\n    color: #383434;\n    padding: 5px 15px;\n    float: right;\n    border-radius: 10px 30px 70px;\n    word-break: break-all;\n}\n\n", ""]);
 
 // exports
 
