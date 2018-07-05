@@ -17,8 +17,8 @@ class FeController
         $question = $request->all()['question'];
         $dir = getcwd();
         $dir = substr($dir, 0, strlen($dir ) - 9);
+        unset($out);
         $c = exec("/usr/bin/python3.5 ".$dir."model/core/cal_text_similarity.py 2>&1 {$question}",$out,$res);
-
-        return $out[0];
+        return $out[sizeof($out) - 1];
     }
 }
