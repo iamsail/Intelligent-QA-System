@@ -38,7 +38,7 @@ def get_questions():
         with connection.cursor() as cursor:
             sql = "SELECT id,question from all_QA;"
             cursor.execute(sql)
-            data = cursor.fetchmany(10)
+            data = cursor.fetchall()
         connection.commit()
     finally:
         connection.close()
@@ -138,7 +138,26 @@ def go(query):
     sims = index[new_vec_tfidf]
     que_index = int(np.argwhere(sims == np.max(sims)))
     # print(questions[que_index])
-    return questions[que_index]
+
+    connection = pymysql.connect(host='127.0.0.1',
+                                 user='root',
+                                 password='sail',
+                                 db='cup',
+                                 charset='utf8mb4',
+                                 cursorclass=pymysql.cursors.DictCursor)
+
+    answer = ''
+
+    try:
+        with connection.cursor() as cursor:
+            sql = "SELECT answer from all_QA where question = %s limit 1"
+            cursor.execute(sql, questions[que_index])
+            answer = cursor.fetchmany(1)
+        connection.commit()
+    finally:
+        connection.close()
+
+    return answer[0]['answer']
 
 
 # print(go('就哈哈哈进一步提升图像去雾就哈哈哈调用次数与界面记录次数不一致'))

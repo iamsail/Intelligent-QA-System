@@ -6,6 +6,20 @@ http://www.cnsoftbei.com/bencandy.php?fid=151&aid=1612
 
 **********************
 
+### 图片展示
+
+#### 交互界面展示
+
+![交互界面展示](./imgs/1.png)
+
+#### QA对管理界面展示
+
+![QA对管理界面展示](./imgs/2.png)
+
+
+**********************
+
+
 ### 参考链接
 
 - [结巴中文分词](https://github.com/fxsjy/jieba)
@@ -21,3 +35,4 @@ http://www.cnsoftbei.com/bencandy.php?fid=151&aid=1612
 - [exec](http://php.net/manual/zh/function.exec.php)
 - [PHP带参数传值调用python脚本](http://www.zongk.com/zongk/95.html)
 - [pymysql（一）检索、增加、更新、删除数据](https://blog.csdn.net/m0_37422217/article/details/76696740)
+
