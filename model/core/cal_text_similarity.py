@@ -1,6 +1,7 @@
 #!usr/bin/python
 # -*- coding:utf-8 -*-
 """ 本文件是计算文本相似度的。将用户的query与qa对中的问题相计算
+    本脚本的调用发生在用户前端提问后,在serve端(PHP)接受到用户的数据时,进行调用
 
 @author: Sail
 @contact: 865605793@qq.com
@@ -24,6 +25,8 @@ import pymysql
 def get_questions():
     """　获取数据库中的问题
 
+    Returns：
+        questions: 知识库中的问题
     """
     questions = []
     data = None
@@ -51,6 +54,12 @@ def get_questions():
 def preprocessing(questions):
     """　对问题预处理
 
+    Args:
+        questions: 从数据库中获取的问题
+
+    Returns：
+        dictionary: 基于问题分词后构建的词典
+        texts:　分词后的问题
     """
     # 1.分词，去除停用词
     stoplist = set('的 ? ？ 能 与 和 是'.split())
@@ -87,6 +96,12 @@ def preprocessing(questions):
 def set_corpus(dictionary, texts):
     """　建立语料库
 
+    Args:
+        dictionary: 基于问题分词后构建的词典
+        texts:　分词后的问题
+
+    Returns：
+        corpus: 语料库
     """
 
     corpus = [dictionary.doc2bow(text) for text in texts]
@@ -94,34 +109,49 @@ def set_corpus(dictionary, texts):
 
 
 def compare(query, dictionary):
-    """　对用户的问题做处理
+    """　将用户的问题基于词典转为词袋的形式表示
 
+    Args:
+        query:　用户在前端输入的问题
+        dictionary: 基于问题分词后构建的词典
+
+    Returns：
+        new_vec: 用户的问题(向量表示)
     """
     # print(dictionary.token2id)
-
     # 将文档分词并使用doc2bow方法对每个不同单词的词频进行了统计，并将单词转换为其编号，然后以稀疏向量的形式返回结果
     query = jieba.cut(query)
     tag = []
     for ele in query:
         tag.append(ele)
 
-
     new_vec = dictionary.doc2bow(tag)
     return new_vec
 
 
+
 def init_model(corpus):
-    # 初始化一个tfidf模型,可以用它来转换向量（词袋整数计数）表示方法为新的表示方法（Tfidf 实数权重）
+    """　初始化模型。基于语料库建立一个tfidf模型，利用此模型可以将文档的向量（词袋整数计数）表示转换为tfidf表示方法
+
+    Args:
+        corpus:　语料库
+
+    Returns：
+        tfidf: 模型
+    """
     tfidf = models.TfidfModel(corpus)
-
-
-    # corpus_tfidf =  tfidf[corpus]
-    #
-    # # 使用上一步得到的带有tfidf值的语料库建立索引
-    # index = similarities.MatrixSimilarity(corpus_tfidf)
     return tfidf
 
+
 def go(query):
+    """　获取问题匹配的答案
+
+    Args:
+        query:　用户的问题
+
+    Returns：
+        answer[0]['answer']: 与问题匹配的答案
+    """
     questions = get_questions()
     dictionary, texts = preprocessing(questions)
     corpus = set_corpus(dictionary, texts)
@@ -160,9 +190,8 @@ def go(query):
     return answer[0]['answer']
 
 
-# print(go('就哈哈哈进一步提升图像去雾就哈哈哈调用次数与界面记录次数不一致'))
 
-# ====================== php 调用
+# php程序进行调用入口函数go()
 
 if __name__ == '__main__':
     print(go(sys.argv[1]))

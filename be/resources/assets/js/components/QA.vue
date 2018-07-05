@@ -60,21 +60,18 @@
                 temp.que = this.askMsg;
                 this.askMsg = '';
 
-
                 axios.get('/app/ask', {
                     params: {
                         question: temp.que
                     }
                 }).then((response) => {
                     temp.ans = response.data;
-                    console.log(this.QA.length)
                     if (temp.ans) {
                         this.QA.push(temp);
                     }
-                })
-                    .catch( (error) => {
+                }).catch( (error) => {
 
-                    });
+                });
             }
         }
     }
