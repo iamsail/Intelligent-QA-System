@@ -166,29 +166,34 @@ def go(query):
 
     # 计算要比较的文档与语料库中每篇文档的相似度
     sims = index[new_vec_tfidf]
-    que_index = int(np.argwhere(sims == np.max(sims)))
-    # print(questions[que_index])
+    if np.argwhere(sims == np.max(sims)).size < 3:
+        que_index = int(np.argwhere(sims == np.max(sims)))
+        # print(questions[que_index])
 
-    connection = pymysql.connect(host='127.0.0.1',
-                                 user='root',
-                                 password='sail',
-                                 db='cup',
-                                 charset='utf8mb4',
-                                 cursorclass=pymysql.cursors.DictCursor)
+        connection = pymysql.connect(host='127.0.0.1',
+                                     user='root',
+                                     password='sail',
+                                     db='cup',
+                                     charset='utf8mb4',
+                                     cursorclass=pymysql.cursors.DictCursor)
 
-    answer = ''
+        answer = ''
 
-    try:
-        with connection.cursor() as cursor:
-            sql = "SELECT answer from all_QA where question = %s limit 1"
-            cursor.execute(sql, questions[que_index])
-            answer = cursor.fetchmany(1)
-        connection.commit()
-    finally:
-        connection.close()
+        try:
+            with connection.cursor() as cursor:
+                sql = "SELECT answer from all_QA where question = %s limit 1"
+                cursor.execute(sql, questions[que_index])
+                answer = cursor.fetchmany(1)
+            connection.commit()
+        finally:
+            connection.close()
 
-    return answer[0]['answer']
+        return answer[0]['answer']
+    else:
+        return '这个问题小矿正在努力学习中!'
 
+# print(go('哈哈哈哈哈'))
+# print(go('裸金属服务器'))
 
 
 # php程序进行调用入口函数go()
