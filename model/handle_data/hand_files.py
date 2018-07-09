@@ -120,7 +120,9 @@ def hand_row_QA(rowQ, rowA):
     question = generate_Q(tagList)
 
     Answer = ''
+    theme = ''
     if question:
+        theme = tagList[0]
         # print('que:',question)
         COMMENT = r'<!--|//'
         for val in rowA[0].stripped_strings:
@@ -131,7 +133,7 @@ def hand_row_QA(rowQ, rowA):
 
         # print()
         # print()
-    return question, Answer
+    return question, Answer, theme
 
 
 
@@ -191,7 +193,7 @@ def final_handle(question, answer):
     pass
 
 
-def save_QA(question, answer, QALink):
+def save_QA(question, answer, QALink, theme):
     # Connect to the database
     connection = pymysql.connect(host='127.0.0.1',
                                  user='root',
@@ -208,11 +210,9 @@ def save_QA(question, answer, QALink):
 
             # Create a new record
             if not is_exist:
-                sql = "INSERT INTO `all_QA` (`question`, `answer`, `answer_link`) VALUES (%s, %s, %s)"
-                cursor.execute(sql, (question, answer, QALink))
+                sql = "INSERT INTO `all_QA` (`question`, `answer`, `answer_link`, `theme`) VALUES (%s, %s, %s, %s)"
+                cursor.execute(sql, (question, answer, QALink, theme))
 
-        # connection is not autocommit by default. So you must commit to save
-        # your changes.
         connection.commit()
     finally:
         connection.close()
@@ -226,31 +226,31 @@ def get_QA(dir):
 
     Returns：
     """
-    # validFileSets = get_valid_files_list(dir, 1055, 1155)
+    # 如果文件不存在,需要先创建该文件
+    filename = '../../chooesd.txt'
 
-    #　这是对规则一的测试数据
-    # validFileSets = get_valid_files_list(dir, 1059, 1060)
 
-    f = open('../../chooesd.txt', 'r')
+
+    f = open(filename, 'r')
+    # f = open(filename, 'a+')
     QAed = f.read()
     f.close()
 
-    validFileSets = get_valid_files_list(dir, 1, 10)
+
+    validFileSets = get_valid_files_list(dir, 1, 4000)
     for i,file in enumerate(validFileSets):
         if not file in QAed:
             rowQ, rowA = get_QA_raw_info(file)
-            question, answer = hand_row_QA(rowQ, rowA)
-            with open('../../chooesd.txt', 'a') as f:
+            question, answer, theme = hand_row_QA(rowQ, rowA)
+            with open(filename, 'a') as f:
                 if question:
                     QALink = 'https://%s' % (file)
-                    # print(question)
-                    # print(answer)
-                    # print(QALink)
+                    # print(theme)
 
                     # 这里如果我们保存了过后,就对这个文件名写的key写为1,以后训练的时候碰到为1的文章就不在进行提取qa
                     get_qa_str = '%s\n' % (file)
                     f.write(get_qa_str)
-                    save_QA(question, answer, QALink)
+                    save_QA(question, answer, QALink, theme)
 
 
 

@@ -19,6 +19,15 @@ http://www.cnsoftbei.com/bencandy.php?fid=151&aid=1612
 
 **********************
 
+### 待做
+
+- 使用react-native构建成APP
+- 加入redis
+- 使用tf/cnn对用户输入提取特征
+
+
+**********************
+
 
 ### 参考链接
 
