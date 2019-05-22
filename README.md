@@ -19,6 +19,18 @@ http://www.cnsoftbei.com/bencandy.php?fid=151&aid=1612
 
 **********************
 
+### 项目启动
+```
+cd be/
+npm install 
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan serve
+```
+
+**********************
+
 ### 待做
 
 - 使用react-native构建成APP
@@ -44,4 +56,4 @@ http://www.cnsoftbei.com/bencandy.php?fid=151&aid=1612
 - [exec](http://php.net/manual/zh/function.exec.php)
 - [PHP带参数传值调用python脚本](http://www.zongk.com/zongk/95.html)
 - [pymysql（一）检索、增加、更新、删除数据](https://blog.csdn.net/m0_37422217/article/details/76696740)
-
+- [Composer 安装与使用 | 菜鸟教程](https://www.runoob.com/w3cnote/composer-install-and-usage.html)
