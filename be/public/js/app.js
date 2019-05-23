@@ -91952,12 +91952,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "AdminCenter",
@@ -91968,10 +91962,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dialogFormVisible: false,
             form: {
                 question: '',
-                theme: '',
-                answer: '',
-                answer_link: '',
-                extend_question: ''
+                chapter: '',
+                answer: ''
             },
             formLabelWidth: '120px'
         };
@@ -92173,11 +92165,11 @@ var render = function() {
                           rows: 4
                         },
                         model: {
-                          value: _vm.form.theme,
+                          value: _vm.form.chapter,
                           callback: function($$v) {
-                            _vm.$set(_vm.form, "theme", $$v)
+                            _vm.$set(_vm.form, "chapter", $$v)
                           },
-                          expression: "form.theme"
+                          expression: "form.chapter"
                         }
                       })
                     ],
@@ -92205,60 +92197,6 @@ var render = function() {
                             _vm.$set(_vm.form, "answer", $$v)
                           },
                           expression: "form.answer"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "答案链接",
-                        "label-width": _vm.formLabelWidth
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: {
-                          "auto-complete": "off",
-                          type: "textarea",
-                          rows: 4
-                        },
-                        model: {
-                          value: _vm.form.answer_link,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "answer_link", $$v)
-                          },
-                          expression: "form.answer_link"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "扩展问题",
-                        "label-width": _vm.formLabelWidth
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: {
-                          "auto-complete": "off",
-                          type: "textarea",
-                          rows: 4
-                        },
-                        model: {
-                          value: _vm.form.extend_question,
-                          callback: function($$v) {
-                            _vm.$set(_vm.form, "extend_question", $$v)
-                          },
-                          expression: "form.extend_question"
                         }
                       })
                     ],

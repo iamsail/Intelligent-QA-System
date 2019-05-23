@@ -24,16 +24,10 @@
                             <el-input v-model="form.question" auto-complete="off" type="textarea" :rows="4"></el-input>
                         </el-form-item>
                         <el-form-item label="主题" :label-width="formLabelWidth">
-                            <el-input v-model="form.theme" auto-complete="off" type="textarea" :rows="4"></el-input>
+                            <el-input v-model="form.chapter" auto-complete="off" type="textarea" :rows="4"></el-input>
                         </el-form-item>
                         <el-form-item label="答案" :label-width="formLabelWidth">
                             <el-input v-model="form.answer" auto-complete="off" type="textarea" :rows="4"></el-input>
-                        </el-form-item>
-                        <el-form-item label="答案链接" :label-width="formLabelWidth">
-                            <el-input v-model="form.answer_link" auto-complete="off" type="textarea" :rows="4"></el-input>
-                        </el-form-item>
-                        <el-form-item label="扩展问题" :label-width="formLabelWidth">
-                            <el-input v-model="form.extend_question" auto-complete="off" type="textarea" :rows="4"></el-input>
                         </el-form-item>
                     </el-form>
                     <div slot="footer" class="dialog-footer">
@@ -57,10 +51,8 @@
                 dialogFormVisible: false,
                 form: {
                     question: '',
-                    theme: '',
+                    chapter: '',
                     answer: '',
-                    answer_link: '',
-                    extend_question: ''
                 },
                 formLabelWidth: '120px'
             };

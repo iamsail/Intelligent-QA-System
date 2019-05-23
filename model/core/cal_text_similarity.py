@@ -32,14 +32,14 @@ def get_questions():
     data = None
     connection = pymysql.connect(host='127.0.0.1',
                                  user='root',
-                                 password='sail',
-                                 db='cup',
+                                 password='123456',
+                                 db='bishe',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with connection.cursor() as cursor:
-            sql = "SELECT id,question from all_QA;"
+            sql = "SELECT question from all_QA;"
             cursor.execute(sql)
             data = cursor.fetchall()
         connection.commit()
@@ -172,8 +172,8 @@ def go(query):
 
         connection = pymysql.connect(host='127.0.0.1',
                                      user='root',
-                                     password='sail',
-                                     db='cup',
+                                     password='123456',
+                                     db='bishe',
                                      charset='utf8mb4',
                                      cursorclass=pymysql.cursors.DictCursor)
 

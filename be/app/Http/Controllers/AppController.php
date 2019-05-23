@@ -104,9 +104,15 @@ class AppController
      *
      * @param  {Request} $request 用户请求
      */
+    // public function addQA(Request $request) {
+    //     $QA = $request->all();
+    //     $add = DB::insert('insert into all_QA(question, theme, answer, answer_link, extend_question) values(?, ?, ?, ?, ?)', [$QA['question'], $QA['theme'], $QA['answer'], $QA['answer_link'], $QA['extend_question']]);
+    //     return ($add)?(1):(0);
+    // }
+
     public function addQA(Request $request) {
         $QA = $request->all();
-        $add = DB::insert('insert into all_QA(question, theme, answer, answer_link, extend_question) values(?, ?, ?, ?, ?)', [$QA['question'], $QA['theme'], $QA['answer'], $QA['answer_link'], $QA['extend_question']]);
+        $add = DB::insert('insert into all_QA(question, chapter, answer) values(?, ?, ?)', [$QA['question'], $QA['chapter'], $QA['answer']]);
         return ($add)?(1):(0);
     }
 }

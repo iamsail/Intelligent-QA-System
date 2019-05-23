@@ -18,7 +18,10 @@ class FeController
         $dir = getcwd();
         $dir = substr($dir, 0, strlen($dir ) - 9);
         unset($out);
-        $c = exec("/usr/bin/python3.5 ".$dir."model/core/cal_text_similarity.py 2>&1 {$question}",$out,$res);
-        return $out[sizeof($out) - 1];
+        // $c = exec("/usr/bin/python3.5 ".$dir."model/core/cal_text_similarity.py 2>&1 {$question}",$out,$res);
+        $c = exec("/Users/lichanghang/.pyenv/shims/python ".$dir."model/core/cal_text_similarity.py 2>&1 {$question}",$out,$res);
+        // return $out[sizeof($out) - 1];
+        return $out;
+        // return sizeof($out) - 1;
     }
 }
